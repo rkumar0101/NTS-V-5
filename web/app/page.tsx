@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import Navbar from "@/components/Navbar";
+import Navbar from "@/components/header/Navbar";
 import Hero from "@/components/Hero";
 import CategoryChips from "../components/CategoryChips";
 import EditorsPicks from "../components/EditorsPicks";
@@ -10,17 +10,31 @@ import Footer from "../components/Footer";
 import NewsCarousel from "../components/NewsCarousel";
 import FeaturedColumnists from "@/components/FeaturedColumnists";
 import StatsCounter from "@/components/StatsCounter";
+import BreakingNews from "@/components/BreakingNews";
+import DataPoint from "@/components/DataPoint";
+import EconomicDashboard from "@/components/EconomicDashboard";
+import OnThisDay from "@/components/OnThisDay";
+import NewsletterSignup from "@/components/NewsletterSignup";
+import SupportBlock from "@/components/SupportBlock";
+import FollowUs from "@/components/FollowUs";
+import Archives from "@/components/Archives";
+import FeaturedMedia from "@/components/FeaturedMedia";
+import DailyQuiz from "@/components/DailyQuiz";
 
 export default function HomePage() {
   const [activeCat, setActiveCat] = useState<string>("All");
 
   return (
     <main>
+      <BreakingNews />
       {/* Carousel sits between nav (from layout) and hero */}
       <NewsCarousel category={activeCat} />
       <Hero />
       <CategoryChips active={activeCat} onChange={setActiveCat} />
       <EditorsPicks category={activeCat} />
+      <DataPoint />
+      <EconomicDashboard />
+      <FeaturedMedia />
       <StatsCounter
         stats={[
           { value: 250, label: "In-Depth Articles", plus: true },
@@ -29,8 +43,15 @@ export default function HomePage() {
           { value: 78000, label: "Readers", format: "compact" },
         ]}
       />
+      <DailyQuiz />
       <FeaturedColumnists />
+      
       <ArticleList />
+      <OnThisDay />
+      <NewsletterSignup />
+      <SupportBlock />
+      <FollowUs />
+      <Archives />
       <Footer />
     </main>
   );

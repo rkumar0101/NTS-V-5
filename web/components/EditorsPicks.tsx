@@ -1,35 +1,43 @@
-// components/EditorsPicks.tsx
-import { editorsPicks } from "../lib/news";
-import ArticleCard from "./ArticleCard";
+// web/components/EditorsPicks.tsx
+import Link from "next/link";
+import { editorsPicks } from "@/lib/news";
+import { formatDate } from "@/lib/date";
 
-export default function EditorsPicks({ category }: { category: string }) {
-  const items =
-    category === "All"
-      ? editorsPicks
-      : editorsPicks.filter((a) => a.category === category);
-
+export default function EditorsPicks({ category }: { category?: string }) {
   return (
-    <section id="editors" className="max-w-6xl mx-auto px-4 md:px-6 py-12">
-      <div className="flex items-end justify-between gap-3">
-        <h2 className="text-2xl md:text-3xl font-semibold tracking-tight">
-          Editors’ Picks
-        </h2>
-        <a href="#editors" className="text-sm text-sky-700 dark:text-sky-400 hover:underline">
-          {category === "All" ? "View all" : `Only ${category}`}
-        </a>
+    <section className="mx-auto max-w-6xl px-4 py-10">
+      <div className="mb-4 flex items-center justify-between">
+        <h2 className="text-xl font-semibold">Editors’ Picks</h2>
+        <Link href="#" className="text-sm text-sky-500 hover:underline">
+          View all
+        </Link>
       </div>
 
-      {items.length === 0 ? (
-        <div className="mt-10 text-center text-sm text-gray-500 dark:text-gray-400">
-          No stories in <span className="font-medium">{category}</span> yet.
-        </div>
-      ) : (
-        <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {items.map((a) => (
-            <ArticleCard key={a.id} article={a} />
-          ))}
-        </div>
-      )}
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {editorsPicks.map((article) => (
+          <Link
+            key={article.id}
+            href={`/article/${article.id}`}
+            className="group overflow-hidden rounded-2xl border border-black/10 bg-white/70 shadow-sm transition hover:shadow-md dark:border-white/10 dark:bg-white/5"
+          >
+            <div className="aspect-[16/9] w-full bg-gradient-to-tr from-slate-200 to-slate-100 dark:from-white/10 dark:to-white/5" />
+            <div className="p-4">
+              <span className="inline-block rounded-full bg-black/5 px-2 py-0.5 text-xs dark:bg-white/10">
+                {article.category}
+              </span>
+              <h3 className="mt-2 text-base font-semibold leading-snug group-hover:underline">
+                {article.title}
+              </h3>
+              <p className="mt-1 text-sm opacity-80 line-clamp-2">
+                {article.excerpt}
+              </p>
+              <div className="mt-4 text-xs text-gray-500 dark:text-gray-400">
+                <time dateTime={article.date}>{formatDate(article.date)}</time>
+              </div>
+            </div>
+          </Link>
+        ))}
+      </div>
     </section>
   );
 }

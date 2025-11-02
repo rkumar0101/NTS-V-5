@@ -1,23 +1,21 @@
+/* web/app/globals.css */
 @import "tailwindcss";
 
-@custom-variant dark (&:where(.dark *));
-
-/* define design tokens */
 :root {
-  --font-sans: ui-sans-serif, system-ui, sans-serif;
-  --color-primary: oklch(0.6 0.2 110);
+  --background: #ffffff;
+  --foreground: #0b0c10;
 }
 
-/* Optional custom utility */
-@layer utilities {
-  .bg-primary {
-    background-color: var(--color-primary);
-  }
+.dark {
+  --background: #0b0c10;
+  --foreground: #f3f4f6;
 }
-@keyframes fade-in {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  transition: background-color 0.25s ease, color 0.25s ease;
 }
-.animate-fade-in {
-  animation: fade-in 0.6s ease-out both;
-}
+
+/* tiny helper */
+.bg-primary { background-color: oklch(0.6 0.2 110); }

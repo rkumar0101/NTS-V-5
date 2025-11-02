@@ -1,13 +1,22 @@
-import "./globals.css";
-import type { ReactNode } from "react";
-import Navbar from "@/components/Navbar";
+// web/app/layout.tsx
+import "@/app/globals.css";
+import type { Metadata } from "next";
+import ThemeProvider from "@/components/ThemeProvider";
+import Header from "@/components/header/Header";
 
-export default function RootLayout({ children }: { children: ReactNode }) {
+export const metadata: Metadata = {
+  title: "Narayani Thoughts",
+  description: "India-first news & analysis",
+};
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      <body className="min-h-dvh">
-        <Navbar />
-        {children}
+    <html lang="en" suppressHydrationWarning>
+      <body className="font-sans bg-background text-foreground">
+        <ThemeProvider>
+          <Header />
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );

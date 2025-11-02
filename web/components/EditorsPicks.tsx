@@ -1,9 +1,13 @@
 // web/components/EditorsPicks.tsx
 import Link from "next/link";
-import { editorsPicks } from "@/lib/news";
+import { categoryMatches, editorsPicks } from "@/lib/news";
 import { formatDate } from "@/lib/date";
 
 export default function EditorsPicks({ category }: { category?: string }) {
+  const filteredPicks = editorsPicks.filter((article) =>
+    categoryMatches(article.category, category),
+  );
+
   return (
     <section className="mx-auto max-w-6xl px-4 py-10">
       <div className="mb-4 flex items-center justify-between">
@@ -14,7 +18,7 @@ export default function EditorsPicks({ category }: { category?: string }) {
       </div>
 
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {editorsPicks.map((article) => (
+        {filteredPicks.map((article) => (
           <Link
             key={article.id}
             href={`/article/${article.id}`}

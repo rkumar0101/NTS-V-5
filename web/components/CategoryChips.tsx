@@ -1,6 +1,8 @@
 // components/CategoryChips.tsx
 "use client";
 
+import { editorsPicks } from "@/lib/news";
+
 type Props = {
   active: string;
   onChange: (value: string) => void;
@@ -8,15 +10,7 @@ type Props = {
 
 const categories = [
   "All",
-  "Politics",
-  "Geo-Politics",
-  "Tech",
-  "Defence",
-  "Sports",
-  "Economy",
-  "Culture",
-  "World",
-  "India",
+  ...Array.from(new Set(editorsPicks.map((article) => article.category))),
 ];
 
 export default function CategoryChips({ active, onChange }: Props) {

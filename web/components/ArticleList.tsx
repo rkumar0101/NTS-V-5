@@ -1,5 +1,6 @@
 // components/ArticleList.tsx
 import { editorsPicks } from "../lib/news";
+import { formatDate } from "@/lib/date";
 import Link from "next/link";
 
 export default function ArticleList() {
@@ -26,7 +27,7 @@ export default function ArticleList() {
                 <p className="mt-1 text-sm text-gray-600 dark:text-gray-300 line-clamp-2">{a.excerpt}</p>
                 <div className="mt-2 text-xs text-gray-500 dark:text-gray-400">
                   {a.category} •{" "}
-                  {new Date(a.date).toLocaleDateString(undefined, { day: "2-digit", month: "short", year: "numeric" })}
+                  {formatDate(a.date)}
                 </div>
               </div>
               <a

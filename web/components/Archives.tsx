@@ -1,6 +1,7 @@
 // web/components/Archives.tsx
 import Link from "next/link";
 import { Article, editorsPicks } from "@/lib/news";
+import { formatDate } from "@/lib/date";
 
 export default function Archives() {
   const now = Date.now();
@@ -30,7 +31,7 @@ export default function Archives() {
             className="rounded-2xl border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 p-5 hover:shadow-sm"
           >
             <div className="text-xs opacity-70">
-              {new Date(a.date).toDateString()}
+              {formatDate(a.date)}
             </div>
             <div className="text-base md:text-lg font-semibold mt-1">{a.title}</div>
             <div className="text-sm opacity-80 line-clamp-2 mt-1">

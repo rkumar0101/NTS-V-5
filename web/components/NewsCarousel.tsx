@@ -3,7 +3,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { editorsPicks } from "@/lib/news";
-import { formatTimeUTC } from "@/lib/date";
+import { formatDate } from "@/lib/date";
 
 type Slide = (typeof editorsPicks)[number];
 
@@ -53,13 +53,13 @@ export default function NewsCarousel({ category }: { category?: string }) {
 
   return (
     <div className="mx-auto max-w-6xl px-4">
-      <div className="mt-2 rounded-xl bg-black/90 p-3 text-white dark:bg-black">
+      <div className="rounded-xl bg-black/90 p-3 text-white">
         <div className="flex items-center gap-2">
           <span className="text-xs opacity-70">{current.category}</span>
           <span className="text-xs opacity-70">•</span>
           {/* Stable, SSR-safe time */}
           <time className="text-xs opacity-70" dateTime={current.date}>
-            {formatTimeUTC(current.date)}
+            {formatDate(current.date)}
           </time>
           <span className="text-xs opacity-70">— Narayani Thoughts</span>
         </div>

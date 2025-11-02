@@ -19,3 +19,8 @@ body {
 
 /* tiny helper */
 .bg-primary { background-color: oklch(0.6 0.2 110); }
+
+html.dark {
+  --background: #0b0c10;
+  --foreground: #f3f4f6;
+}

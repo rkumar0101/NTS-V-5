@@ -1,173 +1,104 @@
-// web/components/header/Navbar.tsx
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { useTheme } from "next-themes";
-import { useEffect, useState } from "react";
-import {
-  Menu,
-  Moon,
-  Sun,
-  Bell,
-  Bookmark,
-  User2,
-  X,
-  Search,
-} from "lucide-react";
-
-const nav = [
-  { href: "/", label: "Home" },
-  { href: "/about", label: "About" },
-  { href: "/contact", label: "Contact" },
-];
+import { Menu, User2 } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function Navbar() {
-  const { theme, setTheme, resolvedTheme } = useTheme();
-  const pathname = usePathname();
-  const [mounted, setMounted] = useState(false);
-  const [open, setOpen] = useState(false);
-  const [q, setQ] = useState("");
-
-  useEffect(() => setMounted(true), []);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [profileOpen, setProfileOpen] = useState(false);
 
   return (
-    <div className="border-b border-black/5 dark:border-white/10">
-      <div className="mx-auto flex max-w-6xl items-center gap-3 px-4 py-3">
-        {/* Left: mobile menu + brand */}
-        <button
-          aria-label="Open menu"
-          className="rounded-md p-2 hover:bg-black/5 dark:hover:bg-white/10 md:hidden"
-          onClick={() => setOpen(true)}
-        >
-          <Menu className="h-5 w-5" />
-        </button>
+    <header className="border-b border-black/10 dark:border-white/10 bg-white/70 dark:bg-black/30 backdrop-blur sticky top-0 z-50">
+      <nav className="max-w-6xl mx-auto px-4 md:px-6 py-3 flex justify-between items-center">
+        {/* Left: Logo + Menu */}
+        <div className="flex items-center gap-4">
+          <div className="relative">
+            <button onClick={() => setMenuOpen(!menuOpen)} className="block">
+              <Menu className="h-5 w-5 text-black dark:text-white" />
+            </button>
 
-        <Link
-          href="/"
-          className="mr-2 whitespace-nowrap text-lg font-semibold tracking-tight"
-        >
-          <span className="opacity-80">Narayani</span>{" "}
-          <span className="text-sky-500">Thoughts</span>
-        </Link>
-
-        {/* Center: search */}
-        <div className="mx-auto hidden w-full max-w-md items-center gap-2 rounded-xl border border-black/10 bg-white/70 px-3 py-2 shadow-sm dark:border-white/10 dark:bg-white/5 md:flex">
-          <Search className="h-4 w-4 opacity-60" />
-          <input
-            value={q}
-            onChange={(e) => setQ(e.target.value)}
-            placeholder="Search stories..."
-            className="w-full bg-transparent text-sm outline-none placeholder:opacity-60"
-          />
-        </div>
-
-        {/* Right: nav links (desktop) */}
-        <nav className="ml-auto hidden items-center gap-4 md:flex">
-          {nav.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={`text-sm transition-colors hover:text-sky-500 ${
-                pathname === item.href ? "text-sky-500" : "opacity-80"
-              }`}
-            >
-              {item.label}
-            </Link>
-          ))}
-        </nav>
-
-        {/* Right: actions */}
-        <div className="ml-2 flex items-center gap-2">
-          {/* Theme toggle */}
-          <button
-            aria-label="Toggle theme"
-            className="rounded-lg border border-black/10 p-2 hover:bg-black/5 dark:border-white/10 dark:hover:bg-white/10"
-            onClick={() =>
-              setTheme(
-                (resolvedTheme ?? theme) === "dark" ? "light" : "dark",
-              )
-            }
-          >
-            {mounted && (resolvedTheme ?? theme) === "dark" ? (
-              <Sun className="h-5 w-5" />
-            ) : (
-              <Moon className="h-5 w-5" />
-            )}
-          </button>
-
-          <button
-            aria-label="Notifications"
-            className="rounded-lg border border-black/10 p-2 hover:bg-black/5 dark:border-white/10 dark:hover:bg-white/10"
-          >
-            <Bell className="h-5 w-5" />
-          </button>
-
-          <button
-            aria-label="Saved"
-            className="rounded-lg border border-black/10 p-2 hover:bg-black/5 dark:border-white/10 dark:hover:bg-white/10"
-          >
-            <Bookmark className="h-5 w-5" />
-          </button>
-
-          <button
-            aria-label="Profile"
-            className="rounded-lg border border-black/10 p-2 hover:bg-black/5 dark:border-white/10 dark:hover:bg-white/10"
-          >
-            <User2 className="h-5 w-5" />
-          </button>
-        </div>
-      </div>
-
-      {/* Mobile drawer */}
-      {open && (
-        <div className="fixed inset-0 z-[60] bg-black/40 md:hidden">
-          <div className="absolute inset-y-0 left-0 w-72 bg-background p-4 shadow-xl">
-            <div className="mb-4 flex items-center justify-between">
-              <Link
-                href="/"
-                className="whitespace-nowrap text-lg font-semibold tracking-tight"
-                onClick={() => setOpen(false)}
-              >
-                <span className="opacity-80">Narayani</span>{" "}
-                <span className="text-sky-500">Thoughts</span>
-              </Link>
-              <button
-                aria-label="Close menu"
-                className="rounded-md p-2 hover:bg-black/5 dark:hover:bg-white/10"
-                onClick={() => setOpen(false)}
-              >
-                <X className="h-5 w-5" />
-              </button>
-            </div>
-
-            <div className="mb-4 flex items-center gap-2 rounded-xl border border-black/10 bg-white/70 px-3 py-2 dark:border-white/10 dark:bg-white/5">
-              <Search className="h-4 w-4 opacity-60" />
-              <input
-                value={q}
-                onChange={(e) => setQ(e.target.value)}
-                placeholder="Search stories..."
-                className="w-full bg-transparent text-sm outline-none placeholder:opacity-60"
-              />
-            </div>
-
-            <nav className="flex flex-col gap-1">
-              {nav.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  onClick={() => setOpen(false)}
-                  className={`rounded-md px-3 py-2 text-sm hover:bg-black/5 dark:hover:bg-white/10 ${
-                    pathname === item.href ? "text-sky-500" : "opacity-80"
-                  }`}
+            <AnimatePresence>
+              {menuOpen && (
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.2 }}
+                  className="absolute left-0 mt-2 w-72 rounded-lg border border-black/10 dark:border-white/10 bg-white dark:bg-slate-800 text-sm shadow-lg z-50 p-4 space-y-4"
                 >
-                  {item.label}
-                </Link>
-              ))}
-            </nav>
+                  <input
+                    type="text"
+                    placeholder="Search stories..."
+                    className="w-full rounded-md px-4 py-2 border border-black/10 dark:border-white/10 bg-white dark:bg-slate-700 text-sm text-black dark:text-white"
+                  />
+
+                  <ul className="space-y-2">
+                    <li>
+                      <Link href="/" className="block px-2 py-1 hover:bg-black/5 dark:hover:bg-white/10">
+                        Home
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href="/about" className="block px-2 py-1 hover:bg-black/5 dark:hover:bg-white/10">
+                        About
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href="/contact" className="block px-2 py-1 hover:bg-black/5 dark:hover:bg-white/10">
+                        Contact
+                      </Link>
+                    </li>
+                  </ul>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
+
+          <Link href="/" className="text-lg font-semibold">
+            Narayani Thoughts
+          </Link>
         </div>
-      )}
-    </div>
+
+        {/* Right: Profile */}
+        <div className="relative">
+          <button onClick={() => setProfileOpen((prev) => !prev)}>
+            <User2 className="h-5 w-5 text-black dark:text-white" />
+          </button>
+
+          <AnimatePresence>
+            {profileOpen && (
+              <motion.ul
+                initial={{ opacity: 0, y: -5 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -5 }}
+                transition={{ duration: 0.2 }}
+                className="absolute right-0 mt-2 w-40 rounded-lg border border-black/10 dark:border-white/10 bg-white dark:bg-slate-800 text-sm shadow-lg z-50"
+              >
+                <li>
+                  <Link href="/profile" className="block px-4 py-2 hover:bg-black/5 dark:hover:bg-white/10">
+                    My Profile
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/settings" className="block px-4 py-2 hover:bg-black/5 dark:hover:bg-white/10">
+                    Settings
+                  </Link>
+                </li>
+                <li>
+                  <button
+                    onClick={() => setProfileOpen(false)}
+                    className="block w-full text-left px-4 py-2 hover:bg-black/5 dark:hover:bg-white/10"
+                  >
+                    Log Out
+                  </button>
+                </li>
+              </motion.ul>
+            )}
+          </AnimatePresence>
+        </div>
+      </nav>
+    </header>
   );
 }

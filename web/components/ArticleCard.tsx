@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { Article } from "../lib/news"; // <-- use RELATIVE import to avoid alias hiccup
+import { formatDate } from "@/lib/date";
 
 export default function ArticleCard({ article }: { article: Article }) {
   return (
@@ -22,11 +23,7 @@ export default function ArticleCard({ article }: { article: Article }) {
         </p>
 
         <div className="mt-4 text-xs text-gray-500 dark:text-gray-400">
-          {new Date(article.date).toLocaleDateString(undefined, {
-            day: "2-digit",
-            month: "short",
-            year: "numeric",
-          })}
+          {formatDate(article.date)}
         </div>
       </div>
     </article>

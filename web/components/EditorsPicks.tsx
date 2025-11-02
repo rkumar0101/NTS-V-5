@@ -22,11 +22,11 @@ export default function EditorsPicks({ category }: { category?: string }) {
           <Link
             key={article.id}
             href={`/article/${article.id}`}
-            className="group overflow-hidden rounded-2xl border border-black/10 bg-white/70 shadow-sm transition hover:shadow-md dark:border-white/10 dark:bg-white/5"
+            className="group overflow-hidden rounded-2xl border border-gray-300 bg-white shadow-sm shadow-sm transition hover:shadow-md dark:border-white/10 dark:bg-white/5"
           >
             <div className="aspect-[16/9] w-full bg-gradient-to-tr from-slate-200 to-slate-100 dark:from-white/10 dark:to-white/5" />
             <div className="p-4">
-              <span className="inline-block rounded-full bg-black/5 px-2 py-0.5 text-xs dark:bg-white/10">
+              <span className="inline-block rounded-full bg-gray-200 px-2 py-0.5 text-xs dark:bg-white/10">
                 {article.category}
               </span>
               <h3 className="mt-2 text-base font-semibold leading-snug group-hover:underline">

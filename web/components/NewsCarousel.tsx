@@ -2,7 +2,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { editorsPicks } from "@/lib/news";
+import { categoryMatches, editorsPicks } from "@/lib/news";
 import { formatTimeUTC } from "@/lib/date";
 
 type Slide = (typeof editorsPicks)[number];
@@ -10,8 +10,8 @@ type Slide = (typeof editorsPicks)[number];
 export default function NewsCarousel({ category }: { category?: string }) {
   const [index, setIndex] = useState(0);
   const slides: Slide[] = editorsPicks
-  .filter((n) => category === "All" || n.category === category)
-  .slice(0, 6);
+    .filter((article) => categoryMatches(article.category, category))
+    .slice(0, 6);
 
   useEffect(() => {
     const id = setInterval(() => setIndex((i) => (i + 1) % slides.length), 6000);

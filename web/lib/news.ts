@@ -3,12 +3,16 @@ export type Article = {
   id: string;
   title: string;
   category: string;
-  date: string;         // ISO yyyy-mm-dd or full ISO
+  date: string; // ISO yyyy-mm-dd or full ISO
   excerpt: string;
   image?: string;
   thumbnail?: string;
   summary?: string;
-  source: string;       // <-- required (your UI prints current.source)
+  source: string; // <-- required (your UI prints current.source)
+};
+
+export const categoryMatches = (articleCategory: string, selected?: string) => {
+  return !selected || selected === "All" || articleCategory === selected;
 };
 
 export const editorsPicks: Article[] = [

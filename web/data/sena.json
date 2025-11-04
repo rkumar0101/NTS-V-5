@@ -1,0 +1,75 @@
+{
+  "stats": {
+    "reporters": 1125,
+    "submissions": 4893,
+    "verified": 3721
+  },
+  "posts": [
+    {
+      "id": "s1",
+      "reporter": "Anjali Mehta",
+      "city": "Lucknow",
+      "title": "Local hospital improves hygiene after citizen report",
+      "summary": "After Narayani Sena's alert, the municipal health team inspected a government hospital and implemented weekly cleaning drives.",
+      "image": "https://images.unsplash.com/photo-1588776814546-382e64d4e2f5?q=80&w=800&auto=format&fit=crop",
+      "verified": true,
+      "timestamp": "3 days ago",
+      "link": "/sena/anjali-hospital-report"
+    },
+    {
+      "id": "s2",
+      "reporter": "Rahul Dutta",
+      "city": "Kolkata",
+      "title": "Citizens rally for safer pedestrian zones",
+      "summary": "Local residents submitted a petition to improve zebra crossings and install traffic lights after multiple accidents near schools.",
+      "image": "https://images.unsplash.com/photo-1556761175-4b46a572b786?q=80&w=800&auto=format&fit=crop",
+      "verified": true,
+      "timestamp": "1 week ago",
+      "link": "/sena/rahul-dutta-pedestrian-safety"
+    },
+    {
+      "id": "s3",
+      "reporter": "Maya Ramesh",
+      "city": "Chennai",
+      "title": "Public park revived through citizen initiative",
+      "summary": "Community members planted 50+ trees, fixed benches, and painted walls as part of the ‘Clean My City’ Narayani Sena program.",
+      "image": "https://images.unsplash.com/photo-1575936123452-b67c3203c357?q=80&w=800&auto=format&fit=crop",
+      "verified": true,
+      "timestamp": "2 weeks ago",
+      "link": "/sena/maya-park-revival"
+    },
+    {
+      "id": "s4",
+      "reporter": "Imran Shaikh",
+      "city": "Mumbai",
+      "title": "Citizens expose illegal dumping near water bodies",
+      "summary": "Residents filmed and reported illegal dumping near Powai Lake, prompting BMC to issue fines to two private contractors.",
+      "image": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=800&auto=format&fit=crop",
+      "verified": false,
+      "timestamp": "4 days ago",
+      "link": "/sena/imran-lake-dumping"
+    },
+    {
+      "id": "s5",
+      "reporter": "Ritika Thakur",
+      "city": "Delhi",
+      "title": "Narayani Sena helps identify fake job ads",
+      "summary": "Using the Sena’s citizen channel, young professionals verified job ads and flagged over 40 fraudulent postings.",
+      "image": "https://images.unsplash.com/photo-1521790361557-4a74ebf16538?q=80&w=800&auto=format&fit=crop",
+      "verified": true,
+      "timestamp": "5 days ago",
+      "link": "/sena/ritika-fake-jobs"
+    },
+    {
+      "id": "s6",
+      "reporter": "Vivek Joshi",
+      "city": "Jaipur",
+      "title": "Rural health camp organized by local Sena volunteers",
+      "summary": "Volunteers hosted a medical camp serving 300 villagers with free check-ups and government health scheme guidance.",
+      "image": "https://images.unsplash.com/photo-1576765607924-3f7b84b51156?q=80&w=800&auto=format&fit=crop",
+      "verified": true,
+      "timestamp": "1 week ago",
+      "link": "/sena/vivek-health-camp"
+    }
+  ]
+}

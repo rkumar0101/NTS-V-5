@@ -1,0 +1,38 @@
+[
+  {
+    "id": "c1",
+    "title": "Procurement Irregularities in Project X",
+    "tags": ["Defence", "Procurement"],
+    "lastUpdate": "2025-10-28",
+    "status": "Ongoing",
+    "summary": "Officials under scrutiny for inflated contract values in a high-value defence procurement deal.",
+    "link": "/tracker/project-x"
+  },
+  {
+    "id": "c2",
+    "title": "Municipal Land Scam in Eastern Zone",
+    "tags": ["Urban Affairs", "Real Estate"],
+    "lastUpdate": "2025-09-15",
+    "status": "Under Investigation",
+    "summary": "Dozens of acres of public land were allegedly sold to private developers at undervalued prices.",
+    "link": "/tracker/land-scam"
+  },
+  {
+    "id": "c3",
+    "title": "Healthcare Procurement Misuse",
+    "tags": ["Health", "Public Funds"],
+    "lastUpdate": "2025-08-22",
+    "status": "Audit Stage",
+    "summary": "Audit teams uncover irregularities in the supply of medical equipment during emergency procurement.",
+    "link": "/tracker/healthcare-procurement"
+  },
+  {
+    "id": "c4",
+    "title": "Mining Royalties Evasion Case",
+    "tags": ["Environment", "Mining"],
+    "lastUpdate": "2025-07-05",
+    "status": "Closed",
+    "summary": "The court concludes a 3-year-long case on royalty evasion by multiple mining companies.",
+    "link": "/tracker/mining-case"
+  }
+]

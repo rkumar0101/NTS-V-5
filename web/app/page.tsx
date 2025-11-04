@@ -20,6 +20,9 @@ import FollowUs from "@/components/FollowUs";
 import Archives from "@/components/Archives";
 import FeaturedMedia from "@/components/FeaturedMedia";
 import DailyQuiz from "@/components/DailyQuiz";
+import CorruptionTrackerShowcase from "@/components/home/CorruptionTrackerShowcase";
+import HeroesShowcase from "@/components/home/HeroesShowcase";
+import NarayaniSenaShowcase from "@/components/home/NarayaniSenaShowcase";
 
 export default function HomePage() {
   const [activeCat, setActiveCat] = useState<string>("All");
@@ -30,11 +33,14 @@ export default function HomePage() {
       {/* Carousel sits between nav (from layout) and hero */}
       <NewsCarousel category={activeCat} />
       <Hero />
+      
       <CategoryChips active={activeCat} onChange={setActiveCat} />
       <EditorsPicks category={activeCat} />
       <DataPoint />
       <EconomicDashboard />
+      <HeroesShowcase/>
       <FeaturedMedia />
+      <CorruptionTrackerShowcase />
       <StatsCounter
         stats={[
           { value: 250, label: "In-Depth Articles", plus: true },
@@ -45,7 +51,7 @@ export default function HomePage() {
       />
       <DailyQuiz />
       <FeaturedColumnists />
-      
+      <NarayaniSenaShowcase/>
       <ArticleList />
       <OnThisDay />
       <NewsletterSignup />

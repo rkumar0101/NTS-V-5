@@ -1,0 +1,44 @@
+[
+  {
+    "id": "y1",
+    "name": "Neha Singh",
+    "city": "Patna",
+    "quote": "Youth participation is not just about voting; it's about volunteering, debating, and holding systems accountable.",
+    "timestamp": "3 days ago"
+  },
+  {
+    "id": "y2",
+    "name": "Arjun Patel",
+    "city": "Ahmedabad",
+    "quote": "Public transport should be affordable and accessible. Every city deserves clean and safe mobility for all.",
+    "timestamp": "1 week ago"
+  },
+  {
+    "id": "y3",
+    "name": "Sara Khan",
+    "city": "Delhi",
+    "quote": "We need better civic education in schools — students should learn how budgets and local bodies actually work.",
+    "timestamp": "2 days ago"
+  },
+  {
+    "id": "y4",
+    "name": "Rohit Das",
+    "city": "Kolkata",
+    "quote": "Corruption isn't abstract — it starts when we ignore small wrongs. Awareness campaigns should target schools.",
+    "timestamp": "1 week ago"
+  },
+  {
+    "id": "y5",
+    "name": "Meera George",
+    "city": "Kochi",
+    "quote": "Digital government services must be inclusive; not everyone has broadband or English literacy.",
+    "timestamp": "5 days ago"
+  },
+  {
+    "id": "y6",
+    "name": "Aakash Sharma",
+    "city": "Bhopal",
+    "quote": "We, the youth, can redefine accountability through data and transparency. Let's build civic tech tools.",
+    "timestamp": "2 weeks ago"
+  }
+]

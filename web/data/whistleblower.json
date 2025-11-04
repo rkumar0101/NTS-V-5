@@ -1,0 +1,43 @@
+{
+  "heading": "Whistleblower Corner",
+  "subtext": "Securely share documents, leads, and evidence that serve the public interest.",
+  "disclaimer": "Do not upload classified material, trade secrets, or anything that endangers lives. Remove metadata before sharing. You are responsible for complying with applicable laws.",
+  "channels": [
+    {
+      "type": "form",
+      "label": "Submit via Secure Form (Coming soon)",
+      "note": "Anonymous form with file support will be enabled in a later release."
+    },
+    {
+      "type": "email",
+      "label": "Encrypted Email",
+      "href": "mailto:tips@narayanithoughts.in",
+      "note": "Use end-to-end encryption if possible."
+    },
+    {
+      "type": "other",
+      "label": "PGP Public Key (Coming soon)",
+      "note": "We’ll publish our PGP key for email encryption."
+    }
+  ],
+  "guidelines": [
+    { "text": "Strip metadata (EXIF) from images/videos before sending." },
+    { "text": "Share only what you can legally disclose; avoid sensitive personal data." },
+    { "text": "Prefer open Wi-Fi + VPN when submitting sensitive tips." },
+    { "text": "If possible, compress and password-protect files; share the password separately." }
+  ],
+  "examples": [
+    {
+      "title": "Procurement Irregularities",
+      "blurb": "Bids, internal mails, tender documents, or invoices that show conflicts of interest."
+    },
+    {
+      "title": "Environmental Violations",
+      "blurb": "Photos/videos with dates and locations indicating pollution or illegal dumping."
+    },
+    {
+      "title": "Public Service Failures",
+      "blurb": "RTI replies, grievance numbers, or memos documenting systemic issues."
+    }
+  ]
+}

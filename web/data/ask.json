@@ -1,0 +1,10 @@
+{
+  "categories": [
+    { "id": "rights", "label": "Citizen Rights" },
+    { "id": "laws", "label": "Law & Process" },
+    { "id": "governance", "label": "Governance" },
+    { "id": "benefits", "label": "Schemes / Benefits" },
+    { "id": "local", "label": "Local Civic Issues" }
+  ],
+  "note": "We answer neutral, fact-checked civic questions. Be specific and avoid sharing sensitive personal data."
+}

@@ -1,0 +1,50 @@
+[
+  {
+    "term": "Right to Information (RTI)",
+    "definition": "A law that allows citizens to request information from public authorities within set timelines.",
+    "slug": "right-to-information-rti",
+    "tag": "Law"
+  },
+  {
+    "term": "Public Interest Litigation (PIL)",
+    "definition": "A legal action filed in a court of law for the protection of public interest, not just personal grievances.",
+    "slug": "public-interest-litigation-pil",
+    "tag": "Courts"
+  },
+  {
+    "term": "First Information Report (FIR)",
+    "definition": "A written document prepared by police when they receive information about the commission of a cognizable offense.",
+    "slug": "first-information-report-fir",
+    "tag": "Police"
+  },
+  {
+    "term": "Grievance Redressal",
+    "definition": "The process of addressing complaints and resolving issues raised by citizens regarding public services.",
+    "slug": "grievance-redressal",
+    "tag": "Governance"
+  },
+  {
+    "term": "Ombudsman",
+    "definition": "An independent official appointed to investigate complaints against public authorities.",
+    "slug": "ombudsman",
+    "tag": "Institutions"
+  },
+  {
+    "term": "Model Code of Conduct",
+    "definition": "A set of guidelines issued by the Election Commission to regulate political parties and candidates during elections.",
+    "slug": "model-code-of-conduct",
+    "tag": "Elections"
+  },
+  {
+    "term": "Public Audit",
+    "definition": "An independent examination of government accounts and performance to ensure transparency and accountability.",
+    "slug": "public-audit",
+    "tag": "Finance"
+  },
+  {
+    "term": "Citizen Charter",
+    "definition": "A public declaration by a government agency of its service standards and timelines for delivery.",
+    "slug": "citizen-charter",
+    "tag": "Services"
+  }
+]

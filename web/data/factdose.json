@@ -1,0 +1,21 @@
+{
+  "heading": "Fact Dose — Daily Civic Brief",
+  "subtext": "Get a neutral, 60-second civic briefing twice a day: laws, rights, policy changes, and verified public-interest updates.",
+  "schedule": "Daily at 8 AM & 8 PM",
+  "tgLink": "https://t.me/your_channel_here",
+  "waLink": "https://wa.me/0000000000?text=Hi%20Narayani%20Fact%20Dose",
+  "examples": [
+    {
+      "title": "RTI Deadline Reminder",
+      "blurb": "RTI responses must be sent within 30 days by public authorities; know your escalation path if delayed."
+    },
+    {
+      "title": "Consumer Rights Tip",
+      "blurb": "If a seller refuses a refund for a defective item within warranty, you can file a complaint in the district forum."
+    },
+    {
+      "title": "Civic Alert",
+      "blurb": "Municipal portal now lets you track road repair requests live — submit a geo-tagged photo."
+    }
+    ]
+}

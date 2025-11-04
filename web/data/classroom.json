@@ -1,0 +1,50 @@
+[
+  {
+    "id": "cc1",
+    "topic": "Right to Information (RTI)",
+    "summary": "How to file an RTI, timelines, fees, and what information you can legally access from public authorities.",
+    "slug": "right-to-information-rti",
+    "icon": "BookOpen",
+    "updated": "2025-09-10"
+  },
+  {
+    "id": "cc2",
+    "topic": "Fundamental Rights — A Quick Primer",
+    "summary": "Understand Articles 12–35: equality, freedom, protection against exploitation, religious freedom, culture & education, and constitutional remedies.",
+    "slug": "fundamental-rights-primer",
+    "icon": "ShieldQuestion",
+    "updated": "2025-10-01"
+  },
+  {
+    "id": "cc3",
+    "topic": "Public Interest Litigation (PIL) — When & How",
+    "summary": "Who can file a PIL, what qualifies as public interest, and common pitfalls to avoid.",
+    "slug": "public-interest-litigation-pil",
+    "icon": "Gavel",
+    "updated": "2025-08-22"
+  },
+  {
+    "id": "cc4",
+    "topic": "Local Government 101: Panchayats & Municipalities",
+    "summary": "How decisions are made at the grassroots, what functions your local body handles, and how to participate.",
+    "slug": "local-government-101",
+    "icon": "Landmark",
+    "updated": "2025-07-15"
+  },
+  {
+    "id": "cc5",
+    "topic": "How to File a Police Complaint (FIR vs. NCR)",
+    "summary": "Difference between FIR and NCR, steps, documents required, and escalation routes if refused.",
+    "slug": "file-police-complaint-fir-ncr",
+    "icon": "Scale",
+    "updated": "2025-10-05"
+  },
+  {
+    "id": "cc6",
+    "topic": "Consumer Rights — Everyday Protections",
+    "summary": "What the Consumer Protection Act covers, how to file a complaint, and typical timelines.",
+    "slug": "consumer-rights-everyday",
+    "icon": "BookOpen",
+    "updated": "2025-09-27"
+  }
+]

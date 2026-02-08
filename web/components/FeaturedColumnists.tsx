@@ -49,14 +49,14 @@ export default function FeaturedColumnists() {
         <div className="flex gap-2">
           <button
             onClick={prev}
-            className="rounded-lg border border-gray-300 dark:border-gray-700 px-3 py-1.5 text-sm"
+            className="rounded-lg border border-[color:var(--border)] px-3 py-1.5 text-sm hover:border-[color:var(--accent)] hover:text-[color:var(--accent)] transition"
             aria-label="Previous"
           >
             ‹
           </button>
           <button
             onClick={next}
-            className="rounded-lg border border-gray-300 dark:border-gray-700 px-3 py-1.5 text-sm"
+            className="rounded-lg border border-[color:var(--border)] px-3 py-1.5 text-sm hover:border-[color:var(--accent)] hover:text-[color:var(--accent)] transition"
             aria-label="Next"
           >
             ›
@@ -76,8 +76,7 @@ export default function FeaturedColumnists() {
           <article
             key={c.id}
             className="snap-start shrink-0 w-[82%] sm:w-[55%] md:w-[40%] lg:w-[30%]
-                       rounded-2xl border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5
-                       shadow-sm hover:shadow-md transition-shadow"
+                       rounded-2xl border surface-card shadow-sm hover:shadow-lg transition-shadow"
           >
             <div className="p-5 flex items-start gap-4">
               <div className="relative h-16 w-16 md:h-20 md:w-20 rounded-full overflow-hidden ring-2 ring-white/70 dark:ring-white/10">
@@ -111,14 +110,14 @@ export default function FeaturedColumnists() {
               </div>
             </div>
 
-            <p className="px-5 pb-3 text-sm text-gray-700 dark:text-gray-300 line-clamp-3">
+            <p className="px-5 pb-3 text-sm text-[color:var(--muted-foreground)] line-clamp-3">
               {c.blurb}
             </p>
 
             <div className="px-5 pb-5 flex items-center justify-between">
               <Link
                 href={c.href}
-                className="text-sm font-medium text-sky-700 dark:text-sky-400 hover:underline"
+                className="text-sm font-medium text-[color:var(--accent)] hover:underline"
               >
                 Read columns →
               </Link>

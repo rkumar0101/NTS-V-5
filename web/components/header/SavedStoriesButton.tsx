@@ -19,22 +19,22 @@ export default function SavedStoriesButton() {
     <div className="relative">
       <button
         onClick={() => setOpen(v => !v)}
-        className="p-2 rounded-full border border-black/10 dark:border-white/10 hover:bg-black/5 dark:hover:bg-white/10"
+        className="p-2 rounded-full border border-[color:var(--border)] hover:bg-[color:var(--surface-muted)] transition"
         aria-label="Saved stories"
       >
         <Bookmark className="h-5 w-5" />
       </button>
 
       {open && (
-        <div className="absolute right-0 mt-2 w-80 rounded-xl border border-black/10 dark:border-white/10 bg-white dark:bg-background shadow-lg">
+        <div className="absolute right-0 mt-2 w-80 rounded-xl border border-[color:var(--border)] bg-[color:var(--surface-elevated)] shadow-xl">
           <div className="p-3 text-sm font-semibold">Saved stories</div>
           {mockSaved.length ? (
-            <ul className="divide-y divide-black/5 dark:divide-white/10">
+            <ul className="divide-y divide-[color:var(--border)]">
               {mockSaved.map(s => (
                 <li key={s.id}>
                   <Link
                     href={`/article/${s.id}`}
-                    className="block px-3 py-2 text-sm hover:bg-black/5 dark:hover:bg.white/10"
+                    className="block px-3 py-2 text-sm hover:bg-[color:var(--surface-muted)] transition"
                   >
                     {s.title}
                   </Link>

@@ -94,7 +94,7 @@ export default function StatsCounter({
           return (
             <div
               key={s.label}
-              className="rounded-2xl border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 p-5 md:p-6 shadow-sm"
+              className="rounded-2xl border surface-card p-5 md:p-6 shadow-sm"
             >
               <div className="text-2xl md:text-3xl font-semibold tracking-tight">
                 {s.prefix ?? ""}
@@ -103,13 +103,13 @@ export default function StatsCounter({
                 </span>
                 {s.plus ? "+" : ""}
               </div>
-              <div className="mt-1 text-sm opacity-80">{s.label}</div>
+              <div className="mt-1 text-sm text-[color:var(--muted-foreground)]">{s.label}</div>
             </div>
           );
         })}
       </div>
 
-      <p className="text-center mt-6 text-sm text-gray-600 dark:text-gray-300">
+      <p className="text-center mt-6 text-sm text-[color:var(--muted-foreground)]">
         {caption}
       </p>
     </section>

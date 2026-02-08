@@ -15,9 +15,13 @@ export default function ThemeToggle() {
   return (
     <button
       onClick={() => setTheme(isDark ? "light" : "dark")}
-      className="px-2 py-1 rounded border"
+      className="fixed bottom-6 left-6 z-50 flex items-center gap-2 rounded-full border border-[color:var(--border)] bg-[color:var(--surface)]/90 px-4 py-2 text-sm font-medium text-[color:var(--foreground)] shadow-lg backdrop-blur transition hover:-translate-y-0.5 hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--ring)]"
+      aria-label="Toggle day and night mode"
     >
-      {isDark ? "🌙 Dark" : "☀️ Light"}
+      <span className="text-base" aria-hidden>
+        {isDark ? "🌙" : "☀️"}
+      </span>
+      <span>{isDark ? "Night" : "Day"} mode</span>
     </button>
   );
 }

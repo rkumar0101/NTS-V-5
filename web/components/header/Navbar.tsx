@@ -42,7 +42,7 @@ export default function Navbar() {
   }, [isAnyOpen]);
 
   return (
-    <header className="border-b border-black/10 dark:border-white/10 bg-white/70 dark:bg-black/30 backdrop-blur sticky top-0 z-50">
+    <header className="border-b border-[color:var(--border)] bg-[color:var(--surface)]/80 backdrop-blur sticky top-0 z-50">
       <nav
         className="max-w-6xl mx-auto px-4 md:px-6 py-3 flex justify-between items-center"
         aria-label="Primary"
@@ -57,7 +57,7 @@ export default function Navbar() {
               onClick={() => setMenuOpen((v) => !v)}
               className="block"
             >
-              <Menu className="h-5 w-5 text-black dark:text-white" />
+              <Menu className="h-5 w-5 text-[color:var(--foreground)]" />
             </button>
 
             {/* Dropdown menu (desktop + mobile unified) */}
@@ -71,20 +71,20 @@ export default function Navbar() {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -8 }}
                   transition={{ duration: 0.18 }}
-                  className="absolute left-0 mt-2 w-80 rounded-lg border border-black/10 dark:border-white/10 bg-white dark:bg-slate-800 text-sm shadow-lg z-[60]"
+                  className="absolute left-0 mt-2 w-80 rounded-lg border border-[color:var(--border)] bg-[color:var(--surface-elevated)] text-sm shadow-xl z-[60]"
                 >
                   <FocusTrap onEscape={closeMenu} autoFocus>
                     <div className="p-4 space-y-4">
                       <input
                         type="text"
                         placeholder="Search stories..."
-                        className="w-full rounded-md px-4 py-2 border border-black/10 dark:border-white/10 bg-white dark:bg-slate-700 text-sm text-black dark:text-white"
+                        className="w-full rounded-md px-4 py-2 border border-[color:var(--border)] bg-[color:var(--surface)] text-sm text-[color:var(--foreground)] placeholder:text-[color:var(--muted-foreground)]"
                       />
                       <ul className="space-y-1">
                         <li>
                           <Link
                             href="/"
-                            className="block rounded px-3 py-2 hover:bg-black/5 dark:hover:bg-white/10"
+                            className="block rounded px-3 py-2 hover:bg-[color:var(--surface-muted)] transition"
                             onClick={closeMenu}
                           >
                             Home
@@ -93,7 +93,7 @@ export default function Navbar() {
                         <li>
                           <Link
                             href="/about"
-                            className="block rounded px-3 py-2 hover:bg-black/5 dark:hover:bg-white/10"
+                            className="block rounded px-3 py-2 hover:bg-[color:var(--surface-muted)] transition"
                             onClick={closeMenu}
                           >
                             About
@@ -102,7 +102,7 @@ export default function Navbar() {
                         <li>
                           <Link
                             href="/contact"
-                            className="block rounded px-3 py-2 hover:bg-black/5 dark:hover:bg-white/10"
+                            className="block rounded px-3 py-2 hover:bg-[color:var(--surface-muted)] transition"
                             onClick={closeMenu}
                           >
                             Contact
@@ -116,7 +116,7 @@ export default function Navbar() {
             </AnimatePresence>
           </div>
 
-          <Link href="/" className="text-lg font-semibold">
+          <Link href="/" className="text-lg font-semibold tracking-tight">
             Narayani Thoughts
           </Link>
         </div>
@@ -129,7 +129,7 @@ export default function Navbar() {
             aria-controls="profile-menu"
             onClick={() => setProfileOpen((prev) => !prev)}
           >
-            <User2 className="h-5 w-5 text-black dark:text-white" />
+            <User2 className="h-5 w-5 text-[color:var(--foreground)]" />
           </button>
 
           <AnimatePresence>
@@ -142,14 +142,14 @@ export default function Navbar() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -6 }}
                 transition={{ duration: 0.18 }}
-                className="absolute right-0 mt-2 w-44 rounded-lg border border-black/10 dark:border-white/10 bg-white dark:bg-slate-800 text-sm shadow-lg z-[60]"
+                className="absolute right-0 mt-2 w-44 rounded-lg border border-[color:var(--border)] bg-[color:var(--surface-elevated)] text-sm shadow-xl z-[60]"
               >
                 <FocusTrap onEscape={closeProfile} autoFocus>
                   <ul className="py-1">
                     <li>
                       <Link
                         href="/profile"
-                        className="block px-4 py-2 hover:bg-black/5 dark:hover:bg-white/10"
+                        className="block px-4 py-2 hover:bg-[color:var(--surface-muted)] transition"
                         onClick={closeProfile}
                       >
                         My Profile
@@ -158,7 +158,7 @@ export default function Navbar() {
                     <li>
                       <Link
                         href="/settings"
-                        className="block px-4 py-2 hover:bg-black/5 dark:hover:bg-white/10"
+                        className="block px-4 py-2 hover:bg-[color:var(--surface-muted)] transition"
                         onClick={closeProfile}
                       >
                         Settings
@@ -167,7 +167,7 @@ export default function Navbar() {
                     <li>
                       <button
                         onClick={closeProfile}
-                        className="block w-full text-left px-4 py-2 hover:bg-black/5 dark:hover:bg-white/10"
+                        className="block w-full text-left px-4 py-2 hover:bg-[color:var(--surface-muted)] transition"
                       >
                         Log Out
                       </button>

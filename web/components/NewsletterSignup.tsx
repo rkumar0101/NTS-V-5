@@ -20,10 +20,10 @@ export default function NewsletterSignup() {
 
   return (
     <section className="max-w-6xl mx-auto px-4 md:px-6 py-10">
-      <div className="rounded-2xl border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 p-6 md:p-8 flex flex-col md:flex-row items-center gap-4 md:gap-6">
+      <div className="rounded-2xl border surface-card p-6 md:p-8 flex flex-col md:flex-row items-center gap-4 md:gap-6">
         <div className="flex-1">
           <h3 className="text-xl md:text-2xl font-semibold">Get Clarity Delivered</h3>
-          <p className="text-sm opacity-80 mt-1">
+          <p className="text-sm text-[color:var(--muted-foreground)] mt-1">
             One concise email. Big picture on politics, economy, tech, and defence.
           </p>
         </div>
@@ -34,12 +34,12 @@ export default function NewsletterSignup() {
             value={email}
             onChange={e => setEmail(e.target.value)}
             placeholder="you@domain.com"
-            className="w-full md:w-72 rounded-lg border border-black/20 dark:border-white/20 bg-transparent px-3 py-2 outline-none"
+            className="w-full md:w-72 rounded-lg border border-[color:var(--border)] bg-[color:var(--surface)] px-3 py-2 outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--ring)]"
             required
           />
           <button
             disabled={state === "loading"}
-            className="rounded-lg bg-sky-600 text-white px-4 py-2 hover:bg-sky-700 disabled:opacity-60"
+            className="rounded-lg bg-[color:var(--accent)] text-[color:var(--accent-foreground)] px-4 py-2 hover:bg-[color:var(--accent-strong)] disabled:opacity-60 transition"
           >
             {state === "loading" ? "Subscribing..." : "Subscribe"}
           </button>

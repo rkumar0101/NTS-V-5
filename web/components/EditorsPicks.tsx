@@ -12,7 +12,7 @@ export default function EditorsPicks({ category }: { category?: string }) {
     <section className="mx-auto max-w-6xl px-4 py-10">
       <div className="mb-4 flex items-center justify-between">
         <h2 className="text-xl font-semibold">Editors’ Picks</h2>
-        <Link href="#" className="text-sm text-sky-500 hover:underline">
+        <Link href="#" className="text-sm text-[color:var(--accent)] hover:underline">
           View all
         </Link>
       </div>
@@ -22,20 +22,20 @@ export default function EditorsPicks({ category }: { category?: string }) {
           <Link
             key={article.id}
             href={`/article/${article.id}`}
-            className="group overflow-hidden rounded-2xl border border-gray-300 bg-white shadow-sm shadow-sm transition hover:shadow-md dark:border-white/10 dark:bg-white/5"
+            className="group overflow-hidden rounded-2xl border surface-card shadow-sm transition hover:shadow-lg"
           >
-            <div className="aspect-[16/9] w-full bg-gradient-to-tr from-slate-200 to-slate-100 dark:from-white/10 dark:to-white/5" />
+            <div className="aspect-[16/9] w-full bg-gradient-to-tr from-slate-200 to-slate-100 dark:from-slate-800 dark:to-slate-900" />
             <div className="p-4">
-              <span className="inline-block rounded-full bg-gray-200 px-2 py-0.5 text-xs dark:bg-white/10">
+              <span className="inline-block rounded-full bg-[color:var(--surface-muted)] px-2 py-0.5 text-xs text-[color:var(--muted-foreground)]">
                 {article.category}
               </span>
               <h3 className="mt-2 text-base font-semibold leading-snug group-hover:underline">
                 {article.title}
               </h3>
-              <p className="mt-1 text-sm opacity-80 line-clamp-2">
+              <p className="mt-1 text-sm text-[color:var(--muted-foreground)] line-clamp-2">
                 {article.excerpt}
               </p>
-              <div className="mt-4 text-xs text-gray-500 dark:text-gray-400">
+              <div className="mt-4 text-xs text-[color:var(--muted-foreground)]">
                 <time dateTime={article.date}>{formatDate(article.date)}</time>
               </div>
             </div>

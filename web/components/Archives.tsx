@@ -28,13 +28,13 @@ export default function Archives() {
           <Link
             key={a.id}
             href={`/article/${a.id}`}
-            className="rounded-2xl border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 p-5 hover:shadow-sm"
+            className="rounded-2xl border surface-card p-5 hover:shadow-md transition-shadow"
           >
-            <div className="text-xs opacity-70">
+            <div className="text-xs text-[color:var(--muted-foreground)]">
               {formatDate(a.date)}
             </div>
             <div className="text-base md:text-lg font-semibold mt-1">{a.title}</div>
-            <div className="text-sm opacity-80 line-clamp-2 mt-1">
+            <div className="text-sm text-[color:var(--muted-foreground)] line-clamp-2 mt-1">
               {a.summary ?? a.excerpt}
             </div>
           </Link>

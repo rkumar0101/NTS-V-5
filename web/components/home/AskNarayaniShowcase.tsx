@@ -3,21 +3,15 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { HelpCircle, Send, Inbox, Tag } from "lucide-react";
+import askData from "@/data/ask.json";
 
 type AskConfig = {
   categories: { id: string; label: string }[];
   note?: string;
 };
 
-let askCfg: AskConfig | undefined;
-try {
-  askCfg = require("../../data/ask.json");
-} catch {
-  askCfg = undefined;
-}
-
 export default function AskNarayaniShowcase() {
-  const cfg: AskConfig = askCfg ?? {
+  const cfg: AskConfig = (askData as AskConfig) ?? {
     categories: [
       { id: "rights", label: "Citizen Rights" },
       { id: "laws", label: "Law & Process" },

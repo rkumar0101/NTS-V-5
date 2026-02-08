@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { BookText, Search } from "lucide-react";
+import glossaryData from "@/data/glossary.json";
 
 type GlossaryItem = {
   term: string;
@@ -12,19 +13,13 @@ type GlossaryItem = {
   tag?: string;  // optional label e.g., "Law", "Civics"
 };
 
-let glossaryData: GlossaryItem[] | undefined;
-try {
-  // JSONs live in web/data/
-  glossaryData = require("../../data/glossary.json");
-} catch {
-  glossaryData = undefined;
-}
-
 export default function GlossaryShowcase() {
   const [q, setQ] = useState("");
 
   const items = useMemo(() => {
-    const base = Array.isArray(glossaryData) ? glossaryData : [];
+    const base = Array.isArray(glossaryData)
+      ? (glossaryData as GlossaryItem[])
+      : [];
     const trimmed = q.trim().toLowerCase();
     if (!trimmed) return base.slice(0, 8);
     return base

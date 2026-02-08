@@ -3,8 +3,9 @@ import Link from "next/link";
 import { Article, editorsPicks } from "@/lib/news";
 import { formatDate } from "@/lib/date";
 
+const NOW = Date.now();
+
 export default function Archives() {
-  const now = Date.now();
   const sixMonths = 1000 * 60 * 60 * 24 * 180;
 
   // Use editorsPicks as the source for now (replace with full news list later)
@@ -13,7 +14,7 @@ export default function Archives() {
   // Prefer 6+ months old, else fallback to last 4 items so the section never crashes
   const older = base.filter((n) => {
     const t = Date.parse(n.date);
-    return !Number.isNaN(t) && now - t > sixMonths;
+    return !Number.isNaN(t) && NOW - t > sixMonths;
   });
 
   const items = (older.length ? older : base).slice(0, 4);

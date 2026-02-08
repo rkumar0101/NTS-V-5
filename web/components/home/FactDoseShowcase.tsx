@@ -4,6 +4,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { Send, Smartphone, MessageSquare, Clock } from "lucide-react";
 import { useState } from "react";
+import factData from "@/data/factdose.json";
 
 type FactDose = {
   heading: string;
@@ -14,15 +15,8 @@ type FactDose = {
   examples?: { title: string; blurb: string }[];
 };
 
-let factData: FactDose | undefined;
-try {
-  factData = require("../../data/factdose.json");
-} catch {
-  factData = undefined;
-}
-
 export default function FactDoseShowcase() {
-  const data: FactDose = factData ?? {
+  const data: FactDose = (factData as FactDose) ?? {
     heading: "Fact Dose",
     subtext: "Daily civic news in 60 seconds — crisp, neutral, verified.",
     schedule: "Daily at 8 AM",

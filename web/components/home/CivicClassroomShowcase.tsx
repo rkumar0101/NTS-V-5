@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { BookOpen, Gavel, Landmark, ShieldQuestion, Scale } from "lucide-react";
+import classroomData from "@/data/classroom.json";
 
 type ClassroomItem = {
   id: string;
@@ -13,14 +14,6 @@ type ClassroomItem = {
   updated?: string;      // ISO or "2 days ago"
 };
 
-let classroomData: ClassroomItem[] | undefined;
-try {
-  // JSONs live in web/data/
-  classroomData = require("../../data/classroom.json");
-} catch {
-  classroomData = undefined;
-}
-
 const ICONS = {
   BookOpen: BookOpen,
   Gavel: Gavel,
@@ -30,7 +23,9 @@ const ICONS = {
 } as const;
 
 export default function CivicClassroomShowcase() {
-  const items = Array.isArray(classroomData) ? classroomData.slice(0, 6) : [];
+  const items = Array.isArray(classroomData)
+    ? (classroomData as ClassroomItem[]).slice(0, 6)
+    : [];
 
   return (
     <section className="max-w-6xl mx-auto px-4 md:px-6 py-8">

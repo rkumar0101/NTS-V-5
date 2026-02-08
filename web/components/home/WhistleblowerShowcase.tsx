@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { ShieldAlert, ShieldCheck, FileWarning, Lock, Send, Mail } from "lucide-react";
 import { useState } from "react";
+import whistleblowerData from "@/data/whistleblower.json";
 
 type Channel = { type: "email" | "form" | "matrix" | "signal" | "other"; label: string; href?: string; note?: string };
 type TipExample = { title: string; blurb: string };
@@ -18,16 +19,8 @@ type WBConfig = {
   disclaimer?: string;
 };
 
-let wbCfg: WBConfig | undefined;
-try {
-  // JSONs live in web/data/
-  wbCfg = require("../../data/whistleblower.json");
-} catch {
-  wbCfg = undefined;
-}
-
 export default function WhistleblowerShowcase() {
-  const data: WBConfig = wbCfg ?? {
+  const data: WBConfig = (whistleblowerData as WBConfig) ?? {
     heading: "Whistleblower Corner",
     subtext: "Securely share documents, leads, and evidence in the public interest.",
     disclaimer:
@@ -88,20 +81,32 @@ export default function WhistleblowerShowcase() {
               const variant = isPrimary
                 ? "bg-red-400 text-black font-semibold hover:bg-red-300"
                 : "border border-white/15 hover:bg-white/10";
-              const Comp: any = c.href ? Link : "button";
+
+              if (c.href) {
+                return (
+                  <Link
+                    key={c.label + i}
+                    href={c.href}
+                    target={c.href.startsWith("http") ? "_blank" : undefined}
+                    className={`${baseClasses} ${variant}`}
+                    title={c.note}
+                  >
+                    <Icon className="w-4 h-4" />
+                    {c.label}
+                  </Link>
+                );
+              }
 
               return (
-                <Comp
+                <button
                   key={c.label + i}
-                  href={c.href}
-                  target={c.href?.startsWith("http") ? "_blank" : undefined}
+                  type="button"
                   className={`${baseClasses} ${variant}`}
-                  onClick={!c.href ? (e: any) => e.preventDefault() : undefined}
                   title={c.note}
                 >
                   <Icon className="w-4 h-4" />
                   {c.label}
-                </Comp>
+                </button>
               );
             })}
 

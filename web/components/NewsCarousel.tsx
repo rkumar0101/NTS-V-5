@@ -19,10 +19,6 @@ export default function NewsCarousel({ category }: { category?: string }) {
   }, [category]);
 
   useEffect(() => {
-    setIndex(0);
-  }, [category, slides.length]);
-
-  useEffect(() => {
     if (slides.length === 0) {
       return;
     }
@@ -35,7 +31,8 @@ export default function NewsCarousel({ category }: { category?: string }) {
     return () => clearInterval(id);
   }, [slides.length]);
 
-  const current = slides[index];
+  const safeIndex = slides.length ? index % slides.length : 0;
+  const current = slides[safeIndex];
 
   if (!current) {
     return (

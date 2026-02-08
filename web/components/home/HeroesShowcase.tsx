@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Medal, Shield } from "lucide-react";
+import heroesData from "@/data/heroes.json";
 
 type Hero = {
   id: string;
@@ -14,16 +15,10 @@ type Hero = {
   tag?: string;
 };
 
-let heroesData: Hero[] | undefined;
-try {
-  // corrected path since JSONs are now in web/data/
-  heroesData = require("../../data/heroes.json");
-} catch {
-  heroesData = undefined;
-}
-
 export default function HeroesShowcase() {
-  const heroes = Array.isArray(heroesData) ? heroesData.slice(0, 4) : [];
+  const heroes = Array.isArray(heroesData)
+    ? (heroesData as Hero[]).slice(0, 4)
+    : [];
 
   return (
     <section className="max-w-6xl mx-auto px-4 md:px-6 py-8">

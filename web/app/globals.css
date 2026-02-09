@@ -1,6 +1,10 @@
 /* web/app/globals.css */
 @import "tailwindcss";
 
+/* ------------------------------------------------------------------ */
+/*  Theme tokens (CSS custom properties)                               */
+/* ------------------------------------------------------------------ */
+
 :root {
   color-scheme: light;
   --background: #f6f7fb;
@@ -29,6 +33,14 @@
   --accent-strong: #0ea5e9;
   --accent-foreground: #020617;
   --ring: #38bdf8;
+}
+
+/* ------------------------------------------------------------------ */
+/*  Base styles                                                        */
+/* ------------------------------------------------------------------ */
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
@@ -60,6 +72,10 @@ body {
     );
 }
 
+/* ------------------------------------------------------------------ */
+/*  Utility classes                                                    */
+/* ------------------------------------------------------------------ */
+
 .surface-card {
   background-color: var(--surface);
   border-color: var(--border);
@@ -72,4 +88,155 @@ body {
 .accent-ring:focus-visible {
   outline: 2px solid var(--ring);
   outline-offset: 2px;
+}
+
+/* Selection highlight */
+::selection {
+  background-color: rgb(99 102 241 / 0.4);
+  color: white;
+}
+
+/* ------------------------------------------------------------------ */
+/*  Scrollbar utilities                                                */
+/* ------------------------------------------------------------------ */
+
+/* Hide scrollbar but keep scroll functionality */
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Thin custom scrollbar for content areas */
+.thin-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+.thin-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.thin-scrollbar::-webkit-scrollbar-thumb {
+  background: rgb(148 163 184 / 0.3);
+  border-radius: 999px;
+}
+
+/* ------------------------------------------------------------------ */
+/*  Keyframe animations                                                */
+/* ------------------------------------------------------------------ */
+
+/* Infinite marquee for news ticker */
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* Subtle fade-in-up for page transitions */
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Slide in from top (mobile menu) */
+@keyframes slide-in-from-top {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Pulse ring for live indicators */
+@keyframes pulse-ring {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(2.5);
+    opacity: 0;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/*  Animation utility classes                                          */
+/* ------------------------------------------------------------------ */
+
+.animate-marquee {
+  animation: marquee 25s linear infinite;
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.7s ease-out both;
+}
+
+.animate-slide-in-top {
+  animation: slide-in-from-top 0.3s ease-out both;
+}
+
+.animate-pulse-ring {
+  animation: pulse-ring 1.5s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+}
+
+/* ------------------------------------------------------------------ */
+/*  Prose overrides for article content                                */
+/* ------------------------------------------------------------------ */
+
+.prose-narayani h2 {
+  font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  font-weight: 900;
+}
+
+.prose-narayani blockquote {
+  border-left-color: var(--accent);
+  font-style: italic;
+}
+
+.prose-narayani a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* First-letter drop cap for articles */
+.drop-cap::first-letter {
+  float: left;
+  font-size: 3.5em;
+  font-weight: 800;
+  line-height: 0.8;
+  margin-right: 0.1em;
+  margin-top: 0.05em;
+  font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+}
+
+/* ------------------------------------------------------------------ */
+/*  Accessibility: reduced motion                                      */
+/* ------------------------------------------------------------------ */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .animate-marquee {
+    animation: none;
+  }
 }

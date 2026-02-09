@@ -1,6 +1,6 @@
 // web/components/Archives.tsx
 import Link from "next/link";
-import { Article, editorsPicks } from "@/lib/news";
+import { editorsPicks } from "@/lib/news";
 import { formatDate } from "@/lib/date";
 
 const NOW = Date.now();
@@ -9,7 +9,7 @@ export default function Archives() {
   const sixMonths = 1000 * 60 * 60 * 24 * 180;
 
   // Use editorsPicks as the source for now (replace with full news list later)
-  const base: Article[] = editorsPicks;
+  const base = editorsPicks;
 
   // Prefer 6+ months old, else fallback to last 4 items so the section never crashes
   const older = base.filter((n) => {

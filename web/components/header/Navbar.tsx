@@ -2,198 +2,212 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { Menu, User2 } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useTheme } from "next-themes";
+import {
+  Menu,
+  X,
+  User,
+  Feather,
+  Sun,
+  Moon,
+  BookOpen,
+  Search,
+  Bookmark,
+  Home,
+  BarChart3,
+  GraduationCap,
+} from "lucide-react";
+import { AnimatePresence, motion } from "framer-motion";
 import FocusTrap from "@/components/ui/FocusTrap";
 
+const NAV_LINKS = [
+  { label: "News", href: "/" },
+  { label: "Economy", href: "/#economy" },
+  { label: "Thoughts", href: "/#thoughts" },
+  { label: "Civic Tools", href: "/#civic" },
+  { label: "About", href: "/about" },
+];
+
+const MOBILE_NAV = [
+  { label: "Home", href: "/", icon: Home },
+  { label: "Search", href: "/#search", icon: Search },
+  { label: "Saved", href: "/#saved", icon: Bookmark },
+  { label: "Civic", href: "/#civic", icon: GraduationCap },
+  { label: "Profile", href: "/profile", icon: User },
+];
+
 export default function Navbar() {
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [profileOpen, setProfileOpen] = useState(false);
-  const isAnyOpen = menuOpen || profileOpen;
+  const [scrolled, setScrolled] = useState(false);
+  const [mobileMenu, setMobileMenu] = useState(false);
+  const [readingMode, setReadingMode] = useState(false);
+  const { resolvedTheme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
 
-  // Close handlers
-  const closeMenu = () => setMenuOpen(false);
-  const closeProfile = () => setProfileOpen(false);
-  const closeAll = () => {
-    setMenuOpen(false);
-    setProfileOpen(false);
-  };
+  useEffect(() => setMounted(true), []);
 
-  // Lock body scroll while any overlay is open
+  // Scroll detection
   useEffect(() => {
-    if (isAnyOpen) {
+    const handleScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (mobileMenu) {
       const prev = document.body.style.overflow;
       document.body.style.overflow = "hidden";
       return () => {
         document.body.style.overflow = prev;
       };
     }
-  }, [isAnyOpen]);
+  }, [mobileMenu]);
 
-  // Global ESC close (redundant with FocusTrap ESC, but ensures both work)
-  useEffect(() => {
-    function onKey(e: KeyboardEvent) {
-      if (e.key === "Escape") closeAll();
-    }
-    if (isAnyOpen) {
-      document.addEventListener("keydown", onKey);
-      return () => document.removeEventListener("keydown", onKey);
-    }
-  }, [isAnyOpen]);
+  const isDark = resolvedTheme === "dark";
+  const toggleTheme = () => setTheme(isDark ? "light" : "dark");
 
   return (
-    <header className="border-b border-[color:var(--border)] bg-[color:var(--surface)]/80 backdrop-blur sticky top-0 z-50">
+    <>
+      {/* ── Desktop / Tablet Navbar ── */}
       <nav
-        className="max-w-6xl mx-auto px-4 md:px-6 py-3 flex justify-between items-center"
-        aria-label="Primary"
+        className={`fixed top-0 w-full z-50 transition-all duration-500 ${
+          scrolled
+            ? "bg-white/90 dark:bg-slate-950/90 backdrop-blur-md shadow-lg py-2"
+            : "bg-white/60 dark:bg-slate-950/60 backdrop-blur-sm py-4"
+        }`}
       >
-        {/* Left: Logo + Hamburger */}
-        <div className="flex items-center gap-4">
-          <div className="relative">
-            <button
-              aria-label="Open menu"
-              aria-expanded={menuOpen}
-              aria-controls="site-menu"
-              onClick={() => setMenuOpen((v) => !v)}
-              className="block"
-            >
-              <Menu className="h-5 w-5 text-[color:var(--foreground)]" />
-            </button>
+        <div className="container mx-auto px-4 flex justify-between items-center">
+          {/* Logo */}
+          <Link href="/" className="flex items-center gap-2 group">
+            <div className="w-10 h-10 bg-indigo-600 rounded-xl flex items-center justify-center text-white shadow-xl shadow-indigo-600/20 group-hover:scale-105 transition-transform">
+              <Feather size={20} />
+            </div>
+            <div className="font-serif text-2xl font-black tracking-tighter text-slate-900 dark:text-white">
+              NARAYANI<span className="text-indigo-500">.</span>
+            </div>
+          </Link>
 
-            {/* Dropdown menu (desktop + mobile unified) */}
-            <AnimatePresence>
-              {menuOpen && (
-                <motion.div
-                  id="site-menu"
-                  role="dialog"
-                  aria-modal="true"
-                  initial={{ opacity: 0, y: -8 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -8 }}
-                  transition={{ duration: 0.18 }}
-                  className="absolute left-0 mt-2 w-80 rounded-lg border border-[color:var(--border)] bg-[color:var(--surface-elevated)] text-sm shadow-xl z-[60]"
-                >
-                  <FocusTrap onEscape={closeMenu} autoFocus>
-                    <div className="p-4 space-y-4">
-                      <input
-                        type="text"
-                        placeholder="Search stories..."
-                        className="w-full rounded-md px-4 py-2 border border-[color:var(--border)] bg-[color:var(--surface)] text-sm text-[color:var(--foreground)] placeholder:text-[color:var(--muted-foreground)]"
-                      />
-                      <ul className="space-y-1">
-                        <li>
-                          <Link
-                            href="/"
-                            className="block rounded px-3 py-2 hover:bg-[color:var(--surface-muted)] transition"
-                            onClick={closeMenu}
-                          >
-                            Home
-                          </Link>
-                        </li>
-                        <li>
-                          <Link
-                            href="/about"
-                            className="block rounded px-3 py-2 hover:bg-[color:var(--surface-muted)] transition"
-                            onClick={closeMenu}
-                          >
-                            About
-                          </Link>
-                        </li>
-                        <li>
-                          <Link
-                            href="/contact"
-                            className="block rounded px-3 py-2 hover:bg-[color:var(--surface-muted)] transition"
-                            onClick={closeMenu}
-                          >
-                            Contact
-                          </Link>
-                        </li>
-                      </ul>
-                    </div>
-                  </FocusTrap>
-                </motion.div>
-              )}
-            </AnimatePresence>
+          {/* Desktop links */}
+          <div className="hidden lg:flex items-center gap-8 text-sm font-bold tracking-wide text-slate-600 dark:text-slate-300">
+            {NAV_LINKS.map((item) => (
+              <Link
+                key={item.label}
+                href={item.href}
+                className="hover:text-indigo-500 transition-colors relative group"
+              >
+                {item.label}
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-indigo-500 transition-all group-hover:w-full" />
+              </Link>
+            ))}
           </div>
 
-          <Link href="/" className="text-lg font-semibold tracking-tight">
-            Narayani Thoughts
-          </Link>
-        </div>
+          {/* Right-side actions */}
+          <div className="flex items-center gap-2 md:gap-3">
+            {/* Reading mode toggle */}
+            <button
+              onClick={() => setReadingMode(!readingMode)}
+              className={`p-2 rounded-full transition-colors ${
+                readingMode
+                  ? "bg-indigo-100 text-indigo-700 dark:bg-indigo-900/40 dark:text-indigo-400"
+                  : "hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-400"
+              }`}
+              title="Reading Mode"
+              aria-label="Toggle reading mode"
+            >
+              <BookOpen size={20} />
+            </button>
 
-        {/* Right: Profile */}
-        <div className="relative">
-          <button
-            aria-label="Open profile menu"
-            aria-expanded={profileOpen}
-            aria-controls="profile-menu"
-            onClick={() => setProfileOpen((prev) => !prev)}
-          >
-            <User2 className="h-5 w-5 text-[color:var(--foreground)]" />
-          </button>
-
-          <AnimatePresence>
-            {profileOpen && (
-              <motion.div
-                id="profile-menu"
-                role="dialog"
-                aria-modal="true"
-                initial={{ opacity: 0, y: -6 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -6 }}
-                transition={{ duration: 0.18 }}
-                className="absolute right-0 mt-2 w-44 rounded-lg border border-[color:var(--border)] bg-[color:var(--surface-elevated)] text-sm shadow-xl z-[60]"
+            {/* Theme toggle */}
+            {mounted && (
+              <button
+                onClick={toggleTheme}
+                className="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-400 transition-colors"
+                aria-label={`Switch to ${isDark ? "light" : "dark"} mode`}
               >
-                <FocusTrap onEscape={closeProfile} autoFocus>
-                  <ul className="py-1">
-                    <li>
-                      <Link
-                        href="/profile"
-                        className="block px-4 py-2 hover:bg-[color:var(--surface-muted)] transition"
-                        onClick={closeProfile}
-                      >
-                        My Profile
-                      </Link>
-                    </li>
-                    <li>
-                      <Link
-                        href="/settings"
-                        className="block px-4 py-2 hover:bg-[color:var(--surface-muted)] transition"
-                        onClick={closeProfile}
-                      >
-                        Settings
-                      </Link>
-                    </li>
-                    <li>
-                      <button
-                        onClick={closeProfile}
-                        className="block w-full text-left px-4 py-2 hover:bg-[color:var(--surface-muted)] transition"
-                      >
-                        Log Out
-                      </button>
-                    </li>
-                  </ul>
-                </FocusTrap>
-              </motion.div>
+                {isDark ? <Sun size={20} /> : <Moon size={20} />}
+              </button>
             )}
-          </AnimatePresence>
+
+            {/* Divider */}
+            <div className="hidden md:block w-px h-6 bg-slate-200 dark:bg-slate-700 mx-1" />
+
+            {/* Sign In */}
+            <Link
+              href="/profile"
+              className="hidden md:flex items-center gap-2 px-5 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-full font-bold text-xs tracking-wide shadow-lg shadow-indigo-600/30 transition-all active:scale-95"
+            >
+              <User size={16} /> SIGN IN
+            </Link>
+
+            {/* Mobile hamburger */}
+            <button
+              onClick={() => setMobileMenu(!mobileMenu)}
+              className="lg:hidden p-2 text-slate-500 dark:text-slate-400"
+              aria-label={mobileMenu ? "Close menu" : "Open menu"}
+              aria-expanded={mobileMenu}
+            >
+              {mobileMenu ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
         </div>
+
+        {/* ── Mobile slide-down menu ── */}
+        <AnimatePresence>
+          {mobileMenu && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.25, ease: "easeInOut" }}
+              className="lg:hidden overflow-hidden border-t border-slate-100 dark:border-slate-800 bg-white dark:bg-slate-950 shadow-2xl"
+            >
+              <FocusTrap onEscape={() => setMobileMenu(false)} autoFocus>
+                <div className="container mx-auto px-4 py-6 grid gap-2">
+                  {NAV_LINKS.map((item) => (
+                    <Link
+                      key={item.label}
+                      href={item.href}
+                      onClick={() => setMobileMenu(false)}
+                      className="text-left text-lg font-bold text-slate-800 dark:text-slate-200 px-3 py-3 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-900 transition-colors"
+                    >
+                      {item.label}
+                    </Link>
+                  ))}
+                  <div className="border-t border-slate-100 dark:border-slate-800 my-2" />
+                  <Link
+                    href="/profile"
+                    onClick={() => setMobileMenu(false)}
+                    className="flex items-center justify-center gap-2 px-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-full font-bold text-sm tracking-wide shadow-lg shadow-indigo-600/30 transition-all active:scale-95"
+                  >
+                    <User size={16} /> Sign In
+                  </Link>
+                </div>
+              </FocusTrap>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </nav>
 
-      {/* Backdrop for any open overlay (click to close) */}
-      <AnimatePresence>
-        {isAnyOpen && (
-          <motion.button
-            aria-label="Close menu"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.18 }}
-            onClick={closeAll}
-            className="fixed inset-0 bg-black/40 backdrop-blur-[1px] z-50"
-          />
-        )}
-      </AnimatePresence>
-    </header>
+      {/* ── Mobile bottom navigation bar ── */}
+      <div className="fixed bottom-0 left-0 right-0 z-50 lg:hidden bg-white/95 dark:bg-slate-950/95 backdrop-blur-md border-t border-slate-200 dark:border-slate-800 safe-area-bottom">
+        <div className="flex items-center justify-around py-2">
+          {MOBILE_NAV.map((item) => {
+            const Icon = item.icon;
+            return (
+              <Link
+                key={item.label}
+                href={item.href}
+                className="flex flex-col items-center gap-0.5 px-3 py-1 text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
+              >
+                <Icon size={20} />
+                <span className="text-[10px] font-bold tracking-wide">
+                  {item.label}
+                </span>
+              </Link>
+            );
+          })}
+        </div>
+      </div>
+    </>
   );
 }

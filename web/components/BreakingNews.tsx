@@ -2,13 +2,12 @@
 
 import Link from "next/link";
 import { siteConfig } from "@/lib/siteConfig";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export default function BreakingNews() {
   const cfg = siteConfig.breaking;
   const [visible, setVisible] = useState(cfg.enabled);
 
-  useEffect(() => setVisible(cfg.enabled), [cfg.enabled]);
   if (!visible) return null;
 
   const color =

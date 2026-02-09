@@ -36,6 +36,39 @@ function useCount(to: number, run: boolean, duration = 1400) {
   return n;
 }
 
+function StatCard({
+  stat,
+  index,
+  visible,
+  compactIntl,
+  intl,
+}: {
+  stat: Stat;
+  index: number;
+  visible: boolean;
+  compactIntl: Intl.NumberFormat;
+  intl: Intl.NumberFormat;
+}) {
+  const count = useCount(stat.value, visible, 1200 + index * 120);
+  const formatted =
+    (stat.format === "compact" ? compactIntl : intl).format(count);
+
+  return (
+    <div className="rounded-2xl border surface-card p-5 md:p-6 shadow-sm">
+      <div className="text-2xl md:text-3xl font-semibold tracking-tight">
+        {stat.prefix ?? ""}
+        <span aria-live="polite" aria-atomic="true">
+          {formatted}
+        </span>
+        {stat.plus ? "+" : ""}
+      </div>
+      <div className="mt-1 text-sm text-[color:var(--muted-foreground)]">
+        {stat.label}
+      </div>
+    </div>
+  );
+}
+
 export default function StatsCounter({
   stats = [
     { value: 250, label: "In-Depth Articles", plus: true },
@@ -87,29 +120,19 @@ export default function StatsCounter({
       aria-label="Narayani Thoughts statistics"
     >
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
-        {stats.map((s, i) => {
-          const count = useCount(s.value, visible, 1200 + i * 120);
-          const formatted =
-            (s.format === "compact" ? compactIntl : intl).format(count);
-          return (
-            <div
-              key={s.label}
-              className="rounded-2xl border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 p-5 md:p-6 shadow-sm"
-            >
-              <div className="text-2xl md:text-3xl font-semibold tracking-tight">
-                {s.prefix ?? ""}
-                <span aria-live="polite" aria-atomic="true">
-                  {formatted}
-                </span>
-                {s.plus ? "+" : ""}
-              </div>
-              <div className="mt-1 text-sm opacity-80">{s.label}</div>
-            </div>
-          );
-        })}
+        {stats.map((stat, index) => (
+          <StatCard
+            key={stat.label}
+            stat={stat}
+            index={index}
+            visible={visible}
+            compactIntl={compactIntl}
+            intl={intl}
+          />
+        ))}
       </div>
 
-      <p className="text-center mt-6 text-sm text-gray-600 dark:text-gray-300">
+      <p className="text-center mt-6 text-sm text-[color:var(--muted-foreground)]">
         {caption}
       </p>
     </section>

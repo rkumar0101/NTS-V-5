@@ -3,21 +3,15 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { HelpCircle, Send, Inbox, Tag } from "lucide-react";
+import askData from "@/data/ask.json";
 
 type AskConfig = {
   categories: { id: string; label: string }[];
   note?: string;
 };
 
-let askCfg: AskConfig | undefined;
-try {
-  askCfg = require("../../data/ask.json");
-} catch {
-  askCfg = undefined;
-}
-
 export default function AskNarayaniShowcase() {
-  const cfg: AskConfig = askCfg ?? {
+  const cfg: AskConfig = (askData as AskConfig) ?? {
     categories: [
       { id: "rights", label: "Citizen Rights" },
       { id: "laws", label: "Law & Process" },
@@ -68,25 +62,29 @@ export default function AskNarayaniShowcase() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.25 }}
-        className="rounded-2xl border border-white/10 bg-white/5 p-5 md:p-6"
+        className="rounded-2xl card-surface p-5 md:p-6"
       >
-        {cfg.note && <p className="text-sm opacity-80 mb-4">{cfg.note}</p>}
+        {cfg.note && (
+          <p className="text-sm text-[color:var(--muted-foreground)] mb-4">
+            {cfg.note}
+          </p>
+        )}
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {/* Question */}
           <label className="md:col-span-2 block">
-            <span className="text-xs uppercase tracking-wide opacity-70 flex items-center gap-1">
+            <span className="text-xs uppercase tracking-wide text-[color:var(--muted-foreground)] flex items-center gap-1">
               <Inbox className="w-3.5 h-3.5" /> Your question
             </span>
             <textarea
               value={question}
               onChange={(e) => setQuestion(e.target.value)}
               placeholder="Ask about rights, laws, processes, benefits…"
-              className="mt-1 w-full rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-sm min-h-[92px] outline-none focus:border-white/20"
+              className="mt-1 w-full rounded-lg border border-[color:var(--border)] bg-[color:var(--surface)] px-3 py-2 text-sm min-h-[92px] outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--ring)]"
               required
               maxLength={600}
             />
-            <div className="text-[11px] opacity-60 mt-1">
+            <div className="text-[11px] text-[color:var(--muted-foreground)] mt-1">
               {question.length}/600
             </div>
           </label>
@@ -94,13 +92,13 @@ export default function AskNarayaniShowcase() {
           {/* Category + email */}
           <div className="space-y-4">
             <label className="block">
-              <span className="text-xs uppercase tracking-wide opacity-70 flex items-center gap-1">
+              <span className="text-xs uppercase tracking-wide text-[color:var(--muted-foreground)] flex items-center gap-1">
                 <Tag className="w-3.5 h-3.5" /> Category
               </span>
               <select
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
-                className="mt-1 w-full rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-sm outline-none focus:border-white/20"
+                className="mt-1 w-full rounded-lg border border-[color:var(--border)] bg-[color:var(--surface)] px-3 py-2 text-sm outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--ring)]"
               >
                 {cfg.categories.map((c) => (
                   <option key={c.id} value={c.id}>
@@ -111,7 +109,7 @@ export default function AskNarayaniShowcase() {
             </label>
 
             <label className="block">
-              <span className="text-xs uppercase tracking-wide opacity-70">
+              <span className="text-xs uppercase tracking-wide text-[color:var(--muted-foreground)]">
                 Email (optional)
               </span>
               <input
@@ -120,9 +118,9 @@ export default function AskNarayaniShowcase() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="you@example.com"
-                className="mt-1 w-full rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-sm outline-none focus:border-white/20"
+                className="mt-1 w-full rounded-lg border border-[color:var(--border)] bg-[color:var(--surface)] px-3 py-2 text-sm outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--ring)]"
               />
-              <div className="text-[11px] opacity-60 mt-1">
+              <div className="text-[11px] text-[color:var(--muted-foreground)] mt-1">
                 We’ll notify you when answers go live (optional).
               </div>
             </label>
@@ -141,7 +139,7 @@ export default function AskNarayaniShowcase() {
             {saved ? "Saved!" : "Submit"}
           </button>
 
-          <span className="text-xs opacity-70">
+          <span className="text-xs text-[color:var(--muted-foreground)]">
             Coming soon: public answers, voting, and expert explainers.
           </span>
         </div>

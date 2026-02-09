@@ -1,8 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo } from "react";
 import { Clock, AlertTriangle } from "lucide-react";
+import trackerData from "@/data/tracker.json";
 
 /**
  * Expected data shape in /data/tracker.json (example):
@@ -30,16 +30,6 @@ type CaseItem = {
   link?: string;
 };
 
-let localData: CaseItem[] | undefined;
-try {
-  // If you place a JSON stub at /web/data/tracker.json you can import it like this.
-  // If not present, we keep localData undefined and show the empty state.
-  // eslint-disable-next-line @typescript-eslint/no-var-requires
-  localData = require("@/data/tracker.json");
-} catch (e) {
-  localData = undefined;
-}
-
 function formatDateIso(iso?: string) {
   if (!iso) return "";
   try {
@@ -52,10 +42,9 @@ function formatDateIso(iso?: string) {
 }
 
 export default function CorruptionTrackerShowcase() {
-  const items: CaseItem[] = useMemo(() => {
-    if (!localData || !Array.isArray(localData)) return [];
-    return localData.slice(0, 4);
-  }, []);
+  const items: CaseItem[] = Array.isArray(trackerData)
+    ? (trackerData as CaseItem[]).slice(0, 4)
+    : [];
 
   return (
     <section className="max-w-6xl mx-auto px-4 md:px-6 py-8">
@@ -68,12 +57,14 @@ export default function CorruptionTrackerShowcase() {
 
       {items.length === 0 ? (
         <div className="rounded-2xl card-surface p-6 flex items-center gap-4">
-          <div className="p-3 rounded-full bg-red-600/10 text-red-400">
+          <div className="p-3 rounded-full bg-red-500/10 text-red-500">
             <AlertTriangle className="w-5 h-5" />
           </div>
           <div>
             <div className="text-sm font-medium">Tracker data not available</div>
-            <div className="text-sm subtle mt-1">Add a `data/tracker.json` to show recent cases.</div>
+            <div className="text-sm subtle mt-1">
+              Add a `data/tracker.json` to show recent cases.
+            </div>
           </div>
         </div>
       ) : (
@@ -89,7 +80,7 @@ export default function CorruptionTrackerShowcase() {
                   <div className="text-xs subtle mt-2 line-clamp-2">{c.summary ?? ""}</div>
                 </div>
                 <div className="flex flex-col items-end text-right">
-                  <div className="text-xs px-2 py-1 rounded-full bg-white/5 text-white/90">
+                  <div className="text-xs px-2 py-1 rounded-full bg-[color:var(--surface-muted)] text-[color:var(--foreground)]">
                     {c.status ?? "Unknown"}
                   </div>
                   <div className="text-xs subtle mt-2 flex items-center gap-1">
@@ -103,7 +94,7 @@ export default function CorruptionTrackerShowcase() {
                 {(c.tags || []).slice(0, 3).map((t) => (
                   <span
                     key={t}
-                    className="text-xs px-2 py-1 rounded-full bg-white/3 text-white/90"
+                    className="text-xs px-2 py-1 rounded-full bg-[color:var(--surface-muted)] text-[color:var(--foreground)]"
                   >
                     {t}
                   </span>

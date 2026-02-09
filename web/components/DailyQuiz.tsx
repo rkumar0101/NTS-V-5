@@ -68,18 +68,18 @@ export default function DailyQuiz() {
 
   return (
     <section className="max-w-6xl mx-auto px-4 md:px-6 py-10">
-      <div className="rounded-2xl border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 p-6 md:p-8">
+      <div className="rounded-2xl border surface-card p-6 md:p-8">
         <div className="flex items-center justify-between gap-3">
           <h3 className="text-xl md:text-2xl font-semibold">
             Daily Intelligence Brief — {qz.date}
           </h3>
-          <div className="text-sm opacity-70">{state.done ? "Finished" : `${state.step}/${total}`}</div>
+          <div className="text-sm text-[color:var(--muted-foreground)]">{state.done ? "Finished" : `${state.step}/${total}`}</div>
         </div>
 
         {/* progress */}
-        <div className="mt-3 h-2 rounded bg-black/10 dark:bg-white/10">
+        <div className="mt-3 h-2 rounded bg-[color:var(--surface-muted)]">
           <div
-            className="h-2 rounded bg-sky-600 transition-all"
+            className="h-2 rounded bg-[color:var(--accent)] transition-all"
             style={{ width: `${state.done ? 100 : progressPct}%` }}
           />
         </div>
@@ -96,8 +96,8 @@ export default function DailyQuiz() {
                       onClick={() => choose(i)}
                       className={`w-full text-left rounded-lg border px-3 py-2
                         ${chosen
-                          ? "border-sky-600 bg-sky-600/10"
-                          : "border-black/20 dark:border-white/20 hover:bg-black/5 dark:hover:bg-white/10"}`}
+                          ? "border-[color:var(--accent)] bg-[color:var(--surface-muted)]"
+                          : "border-[color:var(--border)] hover:bg-[color:var(--surface-muted)]"}`}
                     >
                       {opt}
                     </button>
@@ -123,7 +123,7 @@ export default function DailyQuiz() {
             <div className="mt-4">
               <button
                 onClick={next}
-                className="rounded-lg bg-black text-white dark:bg-white dark:text-black px-4 py-2"
+                className="rounded-lg bg-[color:var(--accent)] text-[color:var(--accent-foreground)] px-4 py-2 shadow-sm hover:bg-[color:var(--accent-strong)] transition"
               >
                 {state.step + 1 < total ? "Next" : "Finish"}
               </button>
@@ -142,7 +142,7 @@ export default function DailyQuiz() {
             <div className="mt-4 flex gap-2">
               <button
                 onClick={restart}
-                className="rounded-lg border border-black/20 dark:border-white/20 px-4 py-2 text-sm hover:bg-black/5 dark:hover:bg-white/10"
+                className="rounded-lg border border-[color:var(--border)] px-4 py-2 text-sm hover:border-[color:var(--accent)] hover:text-[color:var(--accent)] transition"
               >
                 Try again (clear)
               </button>

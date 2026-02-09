@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { BookOpen, Gavel, Landmark, ShieldQuestion, Scale } from "lucide-react";
+import classroomData from "@/data/classroom.json";
 
 type ClassroomItem = {
   id: string;
@@ -13,14 +14,6 @@ type ClassroomItem = {
   updated?: string;      // ISO or "2 days ago"
 };
 
-let classroomData: ClassroomItem[] | undefined;
-try {
-  // JSONs live in web/data/
-  classroomData = require("../../data/classroom.json");
-} catch {
-  classroomData = undefined;
-}
-
 const ICONS = {
   BookOpen: BookOpen,
   Gavel: Gavel,
@@ -30,7 +23,9 @@ const ICONS = {
 } as const;
 
 export default function CivicClassroomShowcase() {
-  const items = Array.isArray(classroomData) ? classroomData.slice(0, 6) : [];
+  const items = Array.isArray(classroomData)
+    ? (classroomData as ClassroomItem[]).slice(0, 6)
+    : [];
 
   return (
     <section className="max-w-6xl mx-auto px-4 md:px-6 py-8">
@@ -48,7 +43,7 @@ export default function CivicClassroomShowcase() {
       </div>
 
       {items.length === 0 ? (
-        <div className="rounded-2xl border border-white/10 p-6 text-sm text-gray-400">
+        <div className="rounded-2xl card-surface p-6 text-sm text-[color:var(--muted-foreground)]">
           No explainers yet. Add entries in <code>data/classroom.json</code>.
         </div>
       ) : (
@@ -62,16 +57,20 @@ export default function CivicClassroomShowcase() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.06, duration: 0.28 }}
                 viewport={{ once: true }}
-                className="rounded-2xl card-surface p-4 hover:bg-white/10 transition-colors"
+                className="rounded-2xl card-surface p-4 hover:bg-[color:var(--surface-muted)] transition-colors"
               >
                 <div className="flex items-start gap-3">
-                  <div className="p-2 rounded-xl bg-emerald-400/15 text-emerald-300">
+                  <div className="p-2 rounded-xl bg-emerald-500/15 text-emerald-600 dark:text-emerald-300">
                     <Icon className="w-5 h-5" />
                   </div>
                   <div className="min-w-0">
                     <h4 className="font-semibold text-base leading-snug">{it.topic}</h4>
-                    <p className="text-sm opacity-80 mt-1 line-clamp-3">{it.summary}</p>
-                    <div className="mt-2 text-xs opacity-60">{it.updated ? `Updated: ${it.updated}` : ""}</div>
+                    <p className="text-sm text-[color:var(--muted-foreground)] mt-1 line-clamp-3">
+                      {it.summary}
+                    </p>
+                    <div className="mt-2 text-xs text-[color:var(--muted-foreground)]">
+                      {it.updated ? `Updated: ${it.updated}` : ""}
+                    </div>
                   </div>
                 </div>
 
@@ -90,20 +89,20 @@ export default function CivicClassroomShowcase() {
       )}
 
       {/* CTA row */}
-      <div className="mt-5 rounded-2xl border border-emerald-400/20 bg-emerald-400/10 p-4 flex flex-col md:flex-row md:items-center md:justify-between gap-3">
-        <div className="text-sm opacity-90">
+      <div className="mt-5 rounded-2xl border border-emerald-400/30 bg-emerald-400/10 p-4 flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+        <div className="text-sm text-[color:var(--muted-foreground)]">
           New to civics? Start with the basics — RTI, Fundamental Rights, PILs, and more.
         </div>
         <div className="flex gap-3">
           <Link
             href="/classroom/starter"
-            className="px-3 py-2 rounded-lg bg-emerald-400 text-black text-sm font-semibold hover:bg-emerald-300 transition-colors"
+            className="px-3 py-2 rounded-lg bg-emerald-500 text-white text-sm font-semibold hover:bg-emerald-600 transition-colors"
           >
             Starter guide
           </Link>
           <Link
             href="/glossary"
-            className="px-3 py-2 rounded-lg border border-white/15 text-sm hover:bg-white/10"
+            className="px-3 py-2 rounded-lg border border-[color:var(--border)] text-sm hover:border-emerald-500 hover:text-emerald-600 transition"
           >
             Open glossary
           </Link>

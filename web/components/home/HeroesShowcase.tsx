@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Medal, Shield } from "lucide-react";
+import heroesData from "@/data/heroes.json";
 
 type Hero = {
   id: string;
@@ -14,16 +15,10 @@ type Hero = {
   tag?: string;
 };
 
-let heroesData: Hero[] | undefined;
-try {
-  // corrected path since JSONs are now in web/data/
-  heroesData = require("../../data/heroes.json");
-} catch {
-  heroesData = undefined;
-}
-
 export default function HeroesShowcase() {
-  const heroes = Array.isArray(heroesData) ? heroesData.slice(0, 4) : [];
+  const heroes = Array.isArray(heroesData)
+    ? (heroesData as Hero[]).slice(0, 4)
+    : [];
 
   return (
     <section className="max-w-6xl mx-auto px-4 md:px-6 py-8">
@@ -37,7 +32,7 @@ export default function HeroesShowcase() {
       </div>
 
       {heroes.length === 0 ? (
-        <div className="rounded-2xl border border-white/10 p-6 text-sm text-gray-400">
+        <div className="rounded-2xl card-surface p-6 text-sm text-[color:var(--muted-foreground)]">
           No hero stories available. Add entries in <code>data/heroes.json</code>.
         </div>
       ) : (
@@ -49,7 +44,7 @@ export default function HeroesShowcase() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.1, duration: 0.3 }}
               viewport={{ once: true }}
-              className="rounded-2xl bg-white/5 hover:bg-white/10 border border-white/10 p-4 flex flex-col transition-all"
+              className="rounded-2xl card-surface p-4 flex flex-col transition-all hover:shadow-md"
             >
               {h.image && (
                 <div className="aspect-[4/3] mb-3 overflow-hidden rounded-xl">
@@ -62,12 +57,14 @@ export default function HeroesShowcase() {
                 </div>
               )}
 
-              <h4 className="font-semibold text-base text-white">{h.name}</h4>
-              <p className="text-xs text-gray-400 mb-1">{h.role}</p>
-              <p className="text-sm text-gray-300 line-clamp-3 flex-1">{h.story}</p>
+              <h4 className="font-semibold text-base">{h.name}</h4>
+              <p className="text-xs text-[color:var(--muted-foreground)] mb-1">{h.role}</p>
+              <p className="text-sm text-[color:var(--muted-foreground)] line-clamp-3 flex-1">
+                {h.story}
+              </p>
 
               <div className="mt-3 flex justify-between items-center">
-                <div className="flex items-center gap-1 text-xs text-yellow-400">
+                <div className="flex items-center gap-1 text-xs text-yellow-500">
                   <Medal className="w-3 h-3" />
                   {h.tag || "National Hero"}
                 </div>

@@ -27,9 +27,9 @@ export default function EconomicDashboard() {
         {economy.map((m) => (
           <div
             key={m.key}
-            className="rounded-2xl border border-gray-300 bg-white dark:bg-white/5 p-4"
+            className="rounded-2xl border surface-card p-4"
           >
-            <div className="text-sm text-gray-700 dark:text-gray-400">{m.label}</div>
+            <div className="text-sm text-[color:var(--muted-foreground)]">{m.label}</div>
             <div className="mt-1 text-2xl font-semibold tracking-tight">
               {typeof m.value === "number"
                 ? new Intl.NumberFormat().format(m.value)

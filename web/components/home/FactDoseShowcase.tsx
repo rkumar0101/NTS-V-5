@@ -4,6 +4,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { Send, Smartphone, MessageSquare, Clock } from "lucide-react";
 import { useState } from "react";
+import factData from "@/data/factdose.json";
 
 type FactDose = {
   heading: string;
@@ -14,15 +15,8 @@ type FactDose = {
   examples?: { title: string; blurb: string }[];
 };
 
-let factData: FactDose | undefined;
-try {
-  factData = require("../../data/factdose.json");
-} catch {
-  factData = undefined;
-}
-
 export default function FactDoseShowcase() {
-  const data: FactDose = factData ?? {
+  const data: FactDose = (factData as FactDose) ?? {
     heading: "Fact Dose",
     subtext: "Daily civic news in 60 seconds — crisp, neutral, verified.",
     schedule: "Daily at 8 AM",
@@ -55,8 +49,8 @@ export default function FactDoseShowcase() {
         )}
       </div>
 
-      <div className="rounded-2xl border border-white/10 bg-white/5 p-5 md:p-6">
-        <p className="text-sm opacity-90 max-w-3xl">
+      <div className="rounded-2xl card-surface p-5 md:p-6">
+        <p className="text-sm text-[color:var(--muted-foreground)] max-w-3xl">
           {data.subtext || "Daily civic news in 60 seconds — crisp, neutral, verified."}
         </p>
 
@@ -66,7 +60,7 @@ export default function FactDoseShowcase() {
             <Link
               href={data.tgLink}
               target="_blank"
-              className="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-sky-500 text-black text-sm font-semibold hover:bg-sky-400 transition-colors"
+              className="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-[color:var(--accent)] text-[color:var(--accent-foreground)] text-sm font-semibold hover:bg-[color:var(--accent-strong)] transition-colors"
             >
               <Send className="w-4 h-4" />
               Join on Telegram
@@ -77,7 +71,7 @@ export default function FactDoseShowcase() {
             <Link
               href={data.waLink}
               target="_blank"
-              className="inline-flex items-center gap-2 px-3 py-2 rounded-lg border border-white/15 text-sm hover:bg-white/10"
+              className="inline-flex items-center gap-2 px-3 py-2 rounded-lg border border-[color:var(--border)] text-sm hover:border-[color:var(--accent)] hover:text-[color:var(--accent)] transition"
             >
               <Smartphone className="w-4 h-4" />
               Open WhatsApp Bot
@@ -89,7 +83,7 @@ export default function FactDoseShowcase() {
             <button
               type="button"
               onClick={() => copyLink(data.waLink ?? data.tgLink)}
-              className="inline-flex items-center gap-2 px-3 py-2 rounded-lg border border-white/15 text-sm hover:bg-white/10"
+              className="inline-flex items-center gap-2 px-3 py-2 rounded-lg border border-[color:var(--border)] text-sm hover:border-[color:var(--accent)] hover:text-[color:var(--accent)] transition"
               aria-live="polite"
             >
               {copied ? "Copied!" : "Copy link"}
@@ -107,10 +101,12 @@ export default function FactDoseShowcase() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.05, duration: 0.25 }}
                 viewport={{ once: true }}
-                className="rounded-xl border border-white/10 bg-white/5 p-3"
+                className="rounded-xl card-surface p-3"
               >
                 <div className="text-sm font-semibold">{ex.title}</div>
-                <div className="text-sm opacity-80 mt-1 line-clamp-3">{ex.blurb}</div>
+                <div className="text-sm text-[color:var(--muted-foreground)] mt-1 line-clamp-3">
+                  {ex.blurb}
+                </div>
               </motion.div>
             ))}
           </div>

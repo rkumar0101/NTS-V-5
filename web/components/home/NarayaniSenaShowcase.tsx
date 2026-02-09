@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Megaphone, MapPin, Users } from "lucide-react";
+import senaData from "@/data/sena.json";
 
 type SenaPost = {
   id: string;
@@ -21,16 +22,8 @@ type SenaData = {
   posts: SenaPost[];
 };
 
-let senaData: SenaData | undefined;
-try {
-  // JSONs live in web/data/
-  senaData = require("../../data/sena.json");
-} catch {
-  senaData = undefined;
-}
-
 export default function NarayaniSenaShowcase() {
-  const data: SenaData = senaData ?? { posts: [] };
+  const data: SenaData = (senaData as SenaData) ?? { posts: [] };
   const posts = Array.isArray(data.posts) ? data.posts.slice(0, 6) : [];
 
   return (
@@ -51,26 +44,26 @@ export default function NarayaniSenaShowcase() {
 
       {/* Stats */}
       <div className="mb-5 grid grid-cols-3 gap-3 max-w-xl">
-        <div className="rounded-xl border border-white/10 bg-white/5 px-3 py-2">
-          <div className="text-[10px] uppercase tracking-wide opacity-60">Reporters</div>
+        <div className="rounded-xl card-surface px-3 py-2">
+          <div className="text-[10px] uppercase tracking-wide text-[color:var(--muted-foreground)]">Reporters</div>
           <div className="text-lg font-semibold flex items-center gap-2">
             <Users className="w-4 h-4 opacity-70" />
             {data.stats?.reporters ?? 0}
           </div>
         </div>
-        <div className="rounded-xl border border-white/10 bg-white/5 px-3 py-2">
-          <div className="text-[10px] uppercase tracking-wide opacity-60">Submissions</div>
+        <div className="rounded-xl card-surface px-3 py-2">
+          <div className="text-[10px] uppercase tracking-wide text-[color:var(--muted-foreground)]">Submissions</div>
           <div className="text-lg font-semibold">{data.stats?.submissions ?? 0}</div>
         </div>
-        <div className="rounded-xl border border-white/10 bg-white/5 px-3 py-2">
-          <div className="text-[10px] uppercase tracking-wide opacity-60">Verified</div>
+        <div className="rounded-xl card-surface px-3 py-2">
+          <div className="text-[10px] uppercase tracking-wide text-[color:var(--muted-foreground)]">Verified</div>
           <div className="text-lg font-semibold">{data.stats?.verified ?? 0}</div>
         </div>
       </div>
 
       {/* Empty state */}
       {posts.length === 0 ? (
-        <div className="rounded-2xl border border-white/10 p-6 text-sm text-gray-400">
+        <div className="rounded-2xl card-surface p-6 text-sm text-[color:var(--muted-foreground)]">
           No citizen reports yet. Add entries in <code>data/sena.json</code>.
         </div>
       ) : (
@@ -82,7 +75,7 @@ export default function NarayaniSenaShowcase() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.06, duration: 0.28 }}
               viewport={{ once: true }}
-              className="rounded-2xl border border-white/10 bg-white/5 hover:bg-white/10 transition-colors"
+              className="rounded-2xl card-surface hover:bg-[color:var(--surface-muted)] transition-colors"
             >
               {p.image && (
                 <div className="aspect-[16/9] overflow-hidden rounded-t-2xl">
@@ -96,7 +89,7 @@ export default function NarayaniSenaShowcase() {
               )}
 
               <div className="p-4">
-                <div className="text-xs opacity-75 mb-1 flex items-center gap-2">
+                <div className="text-xs text-[color:var(--muted-foreground)] mb-1 flex items-center gap-2">
                   <span className="font-medium">{p.reporter}</span>
                   {p.city && (
                     <span className="inline-flex items-center gap-1">
@@ -104,17 +97,17 @@ export default function NarayaniSenaShowcase() {
                     </span>
                   )}
                   {p.verified && (
-                    <span className="ml-auto rounded-md border border-emerald-400/30 text-emerald-300/90 px-1.5 py-0.5 text-[10px]">
+                    <span className="ml-auto rounded-md border border-emerald-400/30 text-emerald-600 dark:text-emerald-300 px-1.5 py-0.5 text-[10px]">
                       Verified
                     </span>
                   )}
                 </div>
 
                 <h4 className="font-semibold text-base mb-1 line-clamp-2">{p.title}</h4>
-                <p className="text-sm opacity-80 line-clamp-3">{p.summary}</p>
+                <p className="text-sm text-[color:var(--muted-foreground)] line-clamp-3">{p.summary}</p>
 
                 <div className="mt-3 flex items-center justify-between text-xs">
-                  <span className="opacity-60">{p.timestamp ?? ""}</span>
+                  <span className="text-[color:var(--muted-foreground)]">{p.timestamp ?? ""}</span>
                   <Link
                     href={p.link ?? `/sena/${p.id}`}
                     className="text-sky-400 hover:underline"
@@ -130,19 +123,19 @@ export default function NarayaniSenaShowcase() {
 
       {/* CTA */}
       <div className="mt-5 rounded-2xl border border-sky-400/20 bg-sky-400/10 p-4 flex flex-col md:flex-row md:items-center md:justify-between gap-3">
-        <div className="text-sm opacity-90">
+        <div className="text-sm text-[color:var(--muted-foreground)]">
           Want to report from your city? Join Narayani Sena and file verified, local stories.
         </div>
         <div className="flex gap-3">
           <Link
             href="/sena/join"
-            className="px-3 py-2 rounded-lg bg-sky-500 text-black text-sm font-semibold hover:bg-sky-400 transition-colors"
+            className="px-3 py-2 rounded-lg bg-[color:var(--accent)] text-[color:var(--accent-foreground)] text-sm font-semibold hover:bg-[color:var(--accent-strong)] transition-colors"
           >
             Become a reporter
           </Link>
           <Link
             href="/sena/how-it-works"
-            className="px-3 py-2 rounded-lg border border-white/15 text-sm hover:bg-white/10"
+            className="px-3 py-2 rounded-lg border border-[color:var(--border)] text-sm hover:border-[color:var(--accent)] hover:text-[color:var(--accent)] transition"
           >
             How it works
           </Link>

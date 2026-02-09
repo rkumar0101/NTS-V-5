@@ -19,10 +19,6 @@ export default function NewsCarousel({ category }: { category?: string }) {
   }, [category]);
 
   useEffect(() => {
-    setIndex(0);
-  }, [category, slides.length]);
-
-  useEffect(() => {
     if (slides.length === 0) {
       return;
     }
@@ -35,12 +31,13 @@ export default function NewsCarousel({ category }: { category?: string }) {
     return () => clearInterval(id);
   }, [slides.length]);
 
-  const current = slides[index];
+  const safeIndex = slides.length ? index % slides.length : 0;
+  const current = slides[safeIndex];
 
   if (!current) {
     return (
       <div className="mx-auto max-w-6xl px-4">
-        <div className="mt-2 rounded-xl bg-black/90 p-4 text-white dark:bg-black">
+        <div className="mt-2 rounded-xl border surface-card p-4">
           <p className="text-sm opacity-80">
             {category && category !== "All"
               ? `We don't have any stories in ${category} yet. Check back soon!`
@@ -53,15 +50,15 @@ export default function NewsCarousel({ category }: { category?: string }) {
 
   return (
     <div className="mx-auto max-w-6xl px-4">
-      <div className="rounded-xl bg-black/90 p-3 text-white">
+      <div className="rounded-xl border surface-card p-3">
         <div className="flex items-center gap-2">
-          <span className="text-xs opacity-70">{current.category}</span>
-          <span className="text-xs opacity-70">•</span>
+          <span className="text-xs text-[color:var(--muted-foreground)]">{current.category}</span>
+          <span className="text-xs text-[color:var(--muted-foreground)]">•</span>
           {/* Stable, SSR-safe time */}
-          <time className="text-xs opacity-70" dateTime={current.date}>
+          <time className="text-xs text-[color:var(--muted-foreground)]" dateTime={current.date}>
             {formatDate(current.date)}
           </time>
-          <span className="text-xs opacity-70">— Narayani Thoughts</span>
+          <span className="text-xs text-[color:var(--muted-foreground)]">— Narayani Thoughts</span>
         </div>
         <div className="mt-1 text-sm">{current.title}</div>
       </div>

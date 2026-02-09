@@ -14,19 +14,19 @@ export default function FeaturedMedia() {
 
   return (
     <section className="max-w-6xl mx-auto px-4 md:px-6 py-10">
-      <div className="rounded-2xl border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 overflow-hidden">
+      <div className="rounded-2xl border surface-card overflow-hidden">
         <div className="p-5 md:p-6 flex flex-col md:flex-row gap-5 md:gap-6 items-start">
           <div className="flex-1">
             <h3 className="text-xl md:text-2xl font-semibold">Featured Video</h3>
             <div className="mt-1 text-lg md:text-xl font-semibold">{featured.title}</div>
             {featured.description && (
-              <p className="mt-2 text-sm md:text-base opacity-80">{featured.description}</p>
+              <p className="mt-2 text-sm md:text-base text-[color:var(--muted-foreground)]">{featured.description}</p>
             )}
           </div>
           {featured.href && (
             <a
               href={featured.href}
-              className="shrink-0 rounded-lg border border-black/20 dark:border-white/20 px-4 py-2 text-sm hover:bg-black/5 dark:hover:bg-white/10"
+              className="shrink-0 rounded-lg border border-[color:var(--border)] px-4 py-2 text-sm hover:border-[color:var(--accent)] hover:text-[color:var(--accent)] transition"
             >
               Open page →
             </a>

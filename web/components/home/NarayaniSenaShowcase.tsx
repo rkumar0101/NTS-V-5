@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Megaphone, MapPin, Users } from "lucide-react";
+import senaData from "@/data/sena.json";
 
 type SenaPost = {
   id: string;
@@ -21,16 +22,8 @@ type SenaData = {
   posts: SenaPost[];
 };
 
-let senaData: SenaData | undefined;
-try {
-  // JSONs live in web/data/
-  senaData = require("../../data/sena.json");
-} catch {
-  senaData = undefined;
-}
-
 export default function NarayaniSenaShowcase() {
-  const data: SenaData = senaData ?? { posts: [] };
+  const data: SenaData = (senaData as SenaData) ?? { posts: [] };
   const posts = Array.isArray(data.posts) ? data.posts.slice(0, 6) : [];
 
   return (

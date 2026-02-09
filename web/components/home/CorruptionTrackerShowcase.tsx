@@ -1,8 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo } from "react";
 import { Clock, AlertTriangle } from "lucide-react";
+import trackerData from "@/data/tracker.json";
 
 /**
  * Expected data shape in /data/tracker.json (example):
@@ -30,16 +30,6 @@ type CaseItem = {
   link?: string;
 };
 
-let localData: CaseItem[] | undefined;
-try {
-  // If you place a JSON stub at /web/data/tracker.json you can import it like this.
-  // If not present, we keep localData undefined and show the empty state.
-  // eslint-disable-next-line @typescript-eslint/no-var-requires
-  localData = require("@/data/tracker.json");
-} catch (e) {
-  localData = undefined;
-}
-
 function formatDateIso(iso?: string) {
   if (!iso) return "";
   try {
@@ -52,10 +42,9 @@ function formatDateIso(iso?: string) {
 }
 
 export default function CorruptionTrackerShowcase() {
-  const items: CaseItem[] = useMemo(() => {
-    if (!localData || !Array.isArray(localData)) return [];
-    return localData.slice(0, 4);
-  }, []);
+  const items: CaseItem[] = Array.isArray(trackerData)
+    ? (trackerData as CaseItem[]).slice(0, 4)
+    : [];
 
   return (
     <section className="max-w-6xl mx-auto px-4 md:px-6 py-8">

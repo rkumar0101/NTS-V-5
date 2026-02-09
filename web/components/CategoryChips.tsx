@@ -15,7 +15,7 @@ const categories = [
 
 export default function CategoryChips({ active, onChange }: Props) {
   return (
-    <section className="py-10">
+    <section id="categories" className="py-10">
       <div className="max-w-5xl mx-auto flex flex-wrap justify-center gap-3 px-4">
         {categories.map((cat) => (
           <button
@@ -24,8 +24,8 @@ export default function CategoryChips({ active, onChange }: Props) {
             className={`px-4 py-2 text-sm font-medium rounded-full border transition-all
               ${
                 active === cat
-                  ? "bg-sky-600 text-white border-sky-600 shadow-sm"
-                  : "border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:border-sky-500 hover:text-sky-600 dark:hover:text-sky-400"
+                  ? "bg-[color:var(--accent)] text-[color:var(--accent-foreground)] border-[color:var(--accent)] shadow-sm"
+                  : "border-[color:var(--border)] text-[color:var(--muted-foreground)] hover:border-[color:var(--accent)] hover:text-[color:var(--accent)]"
               }`}
           >
             {cat}
@@ -33,9 +33,9 @@ export default function CategoryChips({ active, onChange }: Props) {
         ))}
       </div>
 
-      <p className="text-center mt-6 text-sm text-gray-500 dark:text-gray-400">
+      <p className="text-center mt-6 text-sm text-[color:var(--muted-foreground)]">
         Showing stories under{" "}
-        <span className="font-semibold text-sky-600 dark:text-sky-400">
+        <span className="font-semibold text-[color:var(--accent)]">
           {active}
         </span>
       </p>

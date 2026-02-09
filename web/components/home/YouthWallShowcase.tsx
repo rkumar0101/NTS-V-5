@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { MessageCircleHeart, Quote } from "lucide-react";
 import Link from "next/link";
+import youthData from "@/data/youth.json";
 
 type YouthVoice = {
   id: string;
@@ -12,15 +13,10 @@ type YouthVoice = {
   timestamp?: string;
 };
 
-let youthData: YouthVoice[] | undefined;
-try {
-  youthData = require("../../data/youth.json");
-} catch {
-  youthData = undefined;
-}
-
 export default function YouthWallShowcase() {
-  const voices = Array.isArray(youthData) ? youthData.slice(0, 6) : [];
+  const voices = Array.isArray(youthData)
+    ? (youthData as YouthVoice[]).slice(0, 6)
+    : [];
 
   return (
     <section className="max-w-6xl mx-auto px-4 md:px-6 py-8">

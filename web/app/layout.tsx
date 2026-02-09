@@ -3,21 +3,26 @@ import "@/app/globals.css";
 import type { Metadata } from "next";
 import ThemeProvider from "@/components/ThemeProvider";
 import Header from "@/components/header/Header";
-import ThemeToggle from "@/components/ui/FloatingToggles";
+import Footer from "@/components/Footer";
+import { ToastProvider } from "@/components/ui/Toast";
 
 export const metadata: Metadata = {
   title: "Narayani Thoughts",
-  description: "India-first news & analysis",
+  description: "India-first news & analysis — an independent think-tank for the conscious citizen.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className="scroll-smooth" suppressHydrationWarning>
-      <body className="min-h-screen font-sans bg-[color:var(--background)] text-[color:var(--foreground)]">
+      <body className="min-h-screen font-sans bg-[color:var(--background)] text-[color:var(--foreground)] selection:bg-indigo-500 selection:text-white">
         <ThemeProvider>
-          <Header />
-          {children}
-          <ThemeToggle />
+          <ToastProvider>
+            <Header />
+            <main className="pt-16 lg:pt-20 pb-16 lg:pb-0">
+              {children}
+            </main>
+            <Footer />
+          </ToastProvider>
         </ThemeProvider>
       </body>
     </html>

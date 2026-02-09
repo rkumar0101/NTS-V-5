@@ -4,11 +4,12 @@ import { editorsPicks } from "@/lib/news";
 import { formatDate } from "@/lib/date";
 
 type Props = {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 };
 
-export default function ArticlePage({ params }: Props) {
-  const article = editorsPicks.find((item) => item.id === params.id);
+export default async function ArticlePage({ params }: Props) {
+  const { id } = await params;
+  const article = editorsPicks.find((item) => item.id === id);
 
   if (!article) return notFound();
 

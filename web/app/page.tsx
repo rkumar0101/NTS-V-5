@@ -1,24 +1,18 @@
 "use client";
 
-import { useState } from "react";
-import Hero from "@/components/Hero";
-import CategoryChips from "../components/CategoryChips";
-import EditorsPicks from "../components/EditorsPicks";
-import ArticleList from "../components/ArticleList";
-import Footer from "../components/Footer";
-import NewsCarousel from "../components/NewsCarousel";
-import FeaturedColumnists from "@/components/FeaturedColumnists";
+import HeroSection from "@/components/home/HeroSection";
+import NewsTicker from "@/components/home/NewsTicker";
+import LatestStories from "@/components/home/LatestStories";
+import VisualJourneys from "@/components/home/VisualJourneys";
+import Sidebar from "@/components/home/Sidebar";
+import CitizenToolkit from "@/components/home/CitizenToolkit";
+
+/* ── Existing showcase sections (carried forward) ── */
 import StatsCounter from "@/components/StatsCounter";
-import BreakingNews from "@/components/BreakingNews";
-import DataPoint from "@/components/DataPoint";
+import FeaturedColumnists from "@/components/FeaturedColumnists";
+import DailyQuiz from "@/components/DailyQuiz";
 import EconomicDashboard from "@/components/EconomicDashboard";
 import OnThisDay from "@/components/OnThisDay";
-import NewsletterSignup from "@/components/NewsletterSignup";
-import SupportBlock from "@/components/SupportBlock";
-import FollowUs from "@/components/FollowUs";
-import Archives from "@/components/Archives";
-import FeaturedMedia from "@/components/FeaturedMedia";
-import DailyQuiz from "@/components/DailyQuiz";
 import CorruptionTrackerShowcase from "@/components/home/CorruptionTrackerShowcase";
 import HeroesShowcase from "@/components/home/HeroesShowcase";
 import NarayaniSenaShowcase from "@/components/home/NarayaniSenaShowcase";
@@ -30,65 +24,66 @@ import GlossaryShowcase from "@/components/home/GlossaryShowcase";
 import WhistleblowerShowcase from "@/components/home/WhistleblowerShowcase";
 
 export default function HomePage() {
-  const [activeCat, setActiveCat] = useState<string>("All");
-
   return (
-    <main className="space-y-6">
-      {/* 0. Urgent context first */}
-      <BreakingNews />
+    <div className="min-h-screen overflow-x-hidden">
+      {/* ═══ 1. IMMERSIVE HERO ═══ */}
+      <HeroSection />
 
-      {/* 1. Primary discovery */}
-      <NewsCarousel category={activeCat} />
-      <Hero />
+      {/* ═══ 2. LIVE NEWS TICKER ═══ */}
+      <NewsTicker />
 
-      {/* 2. Quick knowledge bites */}
-      <OnThisDay />
-      <DataPoint />
+      {/* ═══ 3. MAIN CONTENT GRID ═══ */}
+      <div className="container mx-auto px-4 mt-20">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+          {/* ── Main feed (8 cols) ── */}
+          <div className="lg:col-span-8 space-y-20">
+            <LatestStories />
+            <VisualJourneys />
+          </div>
 
-      {/* 3. Editorial layer */}
-      <CategoryChips active={activeCat} onChange={setActiveCat} />
-      <EditorsPicks category={activeCat} />
-      <FeaturedMedia />
+          {/* ── Sidebar (4 cols) ── */}
+          <div className="lg:col-span-4">
+            <Sidebar />
+          </div>
+        </div>
 
-      {/* 4. Public-interest showcases */}
-      <CorruptionTrackerShowcase />
-      <HeroesShowcase />
-      <NarayaniSenaShowcase />
-      <CivicClassroomShowcase />
+        {/* ═══ 4. CITIZEN TOOLKIT ═══ */}
+        <CitizenToolkit />
+      </div>
 
-      {/* 5. Utility / habit builders */}
-      <FactDoseShowcase />
-      <GlossaryShowcase />
+      {/* ═══ 5. EXISTING SHOWCASE SECTIONS ═══ */}
+      <div className="space-y-6">
+        {/* Quick knowledge */}
+        <OnThisDay />
 
-      {/* 6. Community voice */}
-      <YouthWallShowcase />
-      <AskNarayaniShowcase />
-      <WhistleblowerShowcase />
+        {/* Public-interest showcases */}
+        <CorruptionTrackerShowcase />
+        <HeroesShowcase />
+        <NarayaniSenaShowcase />
+        <CivicClassroomShowcase />
+        <FactDoseShowcase />
+        <GlossaryShowcase />
 
-      {/* 7. Metrics & quick signals */}
-      <EconomicDashboard />
-      <StatsCounter
-        stats={[
-          { value: 250, label: "In-Depth Articles", plus: true },
-          { value: 49, label: "Columnists" },
-          { value: 100, label: "Fact Checkers", plus: true },
-          { value: 78000, label: "Readers", format: "compact" },
-        ]}
-      />
+        {/* Community voice */}
+        <YouthWallShowcase />
+        <AskNarayaniShowcase />
+        <WhistleblowerShowcase />
 
-      {/* 8. Engagement & stickiness */}
-      <DailyQuiz />
-      <FeaturedColumnists />
-      <ArticleList />
-      <Archives />
+        {/* Economy & metrics */}
+        <EconomicDashboard />
+        <StatsCounter
+          stats={[
+            { value: 250, label: "In-Depth Articles", plus: true },
+            { value: 49, label: "Columnists" },
+            { value: 100, label: "Fact Checkers", plus: true },
+            { value: 78000, label: "Readers", format: "compact" },
+          ]}
+        />
 
-      {/* 9. Conversion & trust */}
-      <NewsletterSignup />
-      <SupportBlock />
-      <FollowUs />
-
-      {/* 10. Footer */}
-      <Footer />
-    </main>
+        {/* Engagement */}
+        <DailyQuiz />
+        <FeaturedColumnists />
+      </div>
+    </div>
   );
 }
